@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- 导航条组件 -->
-        
+        <Header></Header>
         <!-- 商品查询后分类 -->
         <div class="partition">
             <h2>123</h2>
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import navigation from './nav/header.vue'
+import Header from './header/header.vue'
 export default {
     name: "Classification",
     data() {
@@ -19,7 +19,7 @@ export default {
         }
     },
     components:{
-        
+        Header
     }
 }
 </script>

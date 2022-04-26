@@ -1,20 +1,13 @@
 import VueRouter from 'vue-router'
 
-import header from "@/components/nav/header";
+// import header from "@/components/header/header";
 
-import classification from "@/components/classification";
+import classification from "../components/classification.vue";
 
 const routes = [
-    // {
-    //     path:'/',
-    //     component:classification,
-    //     meta:{
-    //         title:'商品分类'
-    //     }
-    // },
     {
         path:'/',
-        component:header,
+        component:classification,
         meta:{
             title:'导航条'
         }

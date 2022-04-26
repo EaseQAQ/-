@@ -111,19 +111,9 @@
         <nav class="main-nav">
             <div class="head-inner">
                 <ul class="main-nav-link">
-                    <li id="J_main_nav_category" class="nav-category"><a href="" class="main-nav-atag" style="color:white">商品分类</a></li>
-                    <li><a href="" class="main-nav-atag">美妆</a></li>
-                    <li><a href="" class="main-nav-atag">女装</a></li>
-                    <li><a href="" class="main-nav-atag">运动</a></li>
-                    <li><a href="" class="main-nav-atag">鞋包</a></li>
-                    <li><a href="" class="main-nav-atag">母婴</a></li>
-                    <li><a href="" class="main-nav-atag">男装</a></li>
-                    <li><a href="" class="main-nav-atag">电器</a></li>
-                    <li><a href="" class="main-nav-atag">食品</a></li>
-                    <li><a href="" class="main-nav-atag">首饰</a></li>
-                    <li><a href="" class="main-nav-atag">数码</a></li>
-                </ul>
-                <div class="nav-category-data">
+                    <li id="J_main_nav_category" class="nav-category">
+                    <a href="" class="main-nav-atag" style="color:white">商品分类</a>
+                    <div class="nav-category-data">
                     <ul class="cate-menu">
                         <li class="cate-menu-item"><span class="menu-item-tit">女装/男装/内衣</span></li>
                         <li class="cate-menu-item"><span class="menu-item-tit">女鞋/男鞋/箱包</span></li>
@@ -137,6 +127,19 @@
                         <li class="cate-menu-item"><span class="menu-item-tit">医药健康</span></li>
                     </ul>
                 </div>
+                    </li>
+                    <li><a href="" class="main-nav-atag">美妆</a></li>
+                    <li><a href="" class="main-nav-atag">女装</a></li>
+                    <li><a href="" class="main-nav-atag">运动</a></li>
+                    <li><a href="" class="main-nav-atag">鞋包</a></li>
+                    <li><a href="" class="main-nav-atag">母婴</a></li>
+                    <li><a href="" class="main-nav-atag">男装</a></li>
+                    <li><a href="" class="main-nav-atag">电器</a></li>
+                    <li><a href="" class="main-nav-atag">食品</a></li>
+                    <li><a href="" class="main-nav-atag">首饰</a></li>
+                    <li><a href="" class="main-nav-atag">数码</a></li>
+                </ul>
+                
             </div>
         </nav>
     </div>
@@ -156,7 +159,7 @@
 
 <style scoped>
 #header{
-    height: 173px;
+    height: 163px;
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%);
 }
 .top-nav{
@@ -233,7 +236,7 @@
     width: 450px;
 }
 .main-nav{
-    margin-top: 30px;
+    margin-top: 20px;
     height: 43px;
     line-height: 43px;
     font-size: 14px;
@@ -273,14 +276,16 @@
     color: #fff;
 }
 .cate-menu{
-    overflow: hidden;
+    display: none;
     width: 156px;
     background-color: #f10180;
-    height: 0;
     -webkit-transition: .2s linear;
     transition: .2s linear;
     padding: 0 0 1px;
     box-shadow: -2px 2px 3px rgb(0 0 0 / 10%);
+}
+.nav-category:hover .cate-menu{
+    display: block;
 }
 .nav-category-data .cate-menu .cate-menu-item {
     display: block;
@@ -292,7 +297,9 @@
     float: none;
 }
 .nav-category-data .cate-menu .cate-menu-item:hover{
-
+    background-color: white;
+    color: #ff4400;
+    cursor: pointer;
 }
 .nav-category-data .cate-menu .cate-menu-item .menu-item-tit {
     font-size: 12px;
