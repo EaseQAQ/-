@@ -8,11 +8,11 @@ const routes = [
         path:'/',
         component:homepage,
         meta:{
-            title:'导航条'
+            title:'首页'
         }
     },
     {
-        path:'/',
+        path:'/classification',
         component:classification,
         meta:{
             title:'商品分类'
