@@ -4,6 +4,7 @@ import classification from "../components/classification.vue";
 import homepage from "../components/homepage.vue";
 
 const routes = [
+    // 首页
     {
         path:'/',
         component:homepage,
@@ -11,11 +12,28 @@ const routes = [
             title:'首页'
         }
     },
+    // 商品分类
     {
         path:'/classification',
         component:classification,
         meta:{
             title:'商品分类'
+        }
+    },
+    // 商家登录注册
+    {
+        path: '/car',
+        component:CarLogon,
+        meta:{
+            title:'商家登录/注册'
+        }
+    },
+    //导入买家登录注册
+    {
+        path: '/buyerlogon',
+        component: BuyerLogon,
+        mate:{
+            title:'用户登录/注册'
         }
     }
 ]
