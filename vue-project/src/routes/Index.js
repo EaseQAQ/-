@@ -1,7 +1,5 @@
 import VueRouter from 'vue-router'
 
-// import header from "@/components/header/header";
-
 import classification from "../components/classification.vue";
 
 const routes = [

@@ -89,9 +89,10 @@
                 </el-breadcrumb>
             </div>
         </div>
-        <!-- logo、查询 -->
+        <!-- logo、搜索 -->
         <div class="head-logo">
             <div class="head-inner">
+                <!-- logo -->
                 <div class="c-logo">
                     <div class="header-logo-dop">
                         <a href="">
@@ -99,6 +100,7 @@
                         </a>
                     </div>
                 </div>
+                <!-- 搜索 -->
                 <div class="c-search">
                     <div class="c-search-form">
                     <el-input placeholder="请输入内容" v-model="input" clearable></el-input>
@@ -110,23 +112,26 @@
         <!-- 商品导航 -->
         <nav class="main-nav">
             <div class="head-inner">
+                <!-- 导航 -->
                 <ul class="main-nav-link">
                     <li id="J_main_nav_category" class="nav-category">
                     <a href="" class="main-nav-atag" style="color:white">商品分类</a>
+                    <!-- 分类 -->
                     <div class="nav-category-data">
-                    <ul class="cate-menu">
-                        <li class="cate-menu-item"><span class="menu-item-tit">女装/男装/内衣</span></li>
-                        <li class="cate-menu-item"><span class="menu-item-tit">女鞋/男鞋/箱包</span></li>
-                        <li class="cate-menu-item"><span class="menu-item-tit">护肤彩妆/个护</span></li>
-                        <li class="cate-menu-item"><span class="menu-item-tit">运动户外</span></li>
-                        <li class="cate-menu-item"><span class="menu-item-tit">家电数码</span></li>
-                        <li class="cate-menu-item"><span class="menu-item-tit">母婴童装</span></li>
-                        <li class="cate-menu-item"><span class="menu-item-tit">手表配饰</span></li>
-                        <li class="cate-menu-item"><span class="menu-item-tit">居家用品</span></li>
-                        <li class="cate-menu-item"><span class="menu-item-tit">唯品生活</span></li>
-                        <li class="cate-menu-item"><span class="menu-item-tit">医药健康</span></li>
-                    </ul>
-                </div>
+                        <ul class="cate-menu">
+                            <li class="cate-menu-item"><span class="menu-item-tit">女装/男装/内衣</span></li>
+                            <li class="cate-menu-item"><span class="menu-item-tit">女鞋/男鞋/箱包</span></li>
+                            <li class="cate-menu-item"><span class="menu-item-tit">护肤彩妆/个护</span></li>
+                            <li class="cate-menu-item"><span class="menu-item-tit">运动户外</span></li>
+                            <li class="cate-menu-item"><span class="menu-item-tit">家电数码</span></li>
+                            <li class="cate-menu-item"><span class="menu-item-tit">母婴童装</span></li>
+                            <li class="cate-menu-item"><span class="menu-item-tit">手表配饰</span></li>
+                            <li class="cate-menu-item"><span class="menu-item-tit">居家用品</span></li>
+                            <li class="cate-menu-item"><span class="menu-item-tit">唯品生活</span></li>
+                            <li class="cate-menu-item"><span class="menu-item-tit">医药健康</span></li>
+                        </ul>
+                    </div>
+                    <!-- 分类 end -->
                     </li>
                     <li><a href="" class="main-nav-atag">美妆</a></li>
                     <li><a href="" class="main-nav-atag">女装</a></li>
@@ -139,7 +144,6 @@
                     <li><a href="" class="main-nav-atag">首饰</a></li>
                     <li><a href="" class="main-nav-atag">数码</a></li>
                 </ul>
-                
             </div>
         </nav>
     </div>
