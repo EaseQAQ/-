@@ -162,6 +162,12 @@
 </script>
 
 <style scoped>
+.c-search-form >>> .el-input__inner{
+    border-color: #ff4400;
+}
+.c-search-form >>> .el-input__inner:focus{
+    border-color: #ff4400;
+}
 #header{
     height: 163px;
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%);

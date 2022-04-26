@@ -2,6 +2,8 @@ import VueRouter from 'vue-router'
 
 import classification from "../components/classification.vue";
 import homepage from "../components/homepage.vue";
+import CarLogon from "../components/homepage.vue";
+import BuyerLogon from "../components/homepage.vue";
 
 const routes = [
     // 首页
