@@ -1,13 +1,21 @@
 import VueRouter from 'vue-router'
 
 import classification from "../components/classification.vue";
+import homepage from "../components/homepage.vue";
 
 const routes = [
     {
         path:'/',
-        component:classification,
+        component:homepage,
         meta:{
             title:'导航条'
+        }
+    },
+    {
+        path:'/',
+        component:classification,
+        meta:{
+            title:'商品分类'
         }
     }
 ]

@@ -4,12 +4,15 @@
         <Header></Header>
         <!-- 筛选 -->
         <Screen></Screen>
+        <div class="c-goods-list">
+
+        </div>
     </div>
 </template>
 
 <script>
-import Header from './header/header.vue'
-import Screen from './header/screen.vue'
+import Header from './shared/header.vue'
+import Screen from './shared/screen.vue'
 export default {
     name: "Classification",
     data() {
