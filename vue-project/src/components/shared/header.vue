@@ -52,15 +52,13 @@
                         </el-breadcrumb-item>
                         <el-breadcrumb-item>
                             <el-dropdown>
-                                <a href="#" class="transform">
-                                    免费开店
-                                </a>
+                                <a href="/car" class="transform">免费开店</a>   
                             </el-dropdown>
                         </el-breadcrumb-item>
                         <el-breadcrumb-item >|</el-breadcrumb-item>
                         <el-breadcrumb-item>
                             <el-dropdown>
-                                <a href="/cai" class="transform">
+                                <a href="" class="transform">
                                     <span class="el-dropdown-link">
                                         淘宝呗卖家中心<i class="el-icon-arrow-down el-icon--right"></i>
                                     </span>
@@ -288,7 +286,9 @@
 .cate-menu{
     display: none;
     width: 156px;
-    background-color: #f10180;
+    background-color: #ff4400
+    
+    ;
     -webkit-transition: .2s linear;
     transition: .2s linear;
     padding: 0 0 1px;
