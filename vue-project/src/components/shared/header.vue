@@ -50,21 +50,16 @@
                                 </a>
                             </el-dropdown>
                         </el-breadcrumb-item>
-                        <el-breadcrumb-item>
-                            <el-dropdown>
-                                <a href="/car" class="transform">免费开店</a>   
-                            </el-dropdown>
-                        </el-breadcrumb-item>
                         <el-breadcrumb-item >|</el-breadcrumb-item>
                         <el-breadcrumb-item>
                             <el-dropdown>
-                                <a href="" class="transform">
+                                <a href="/car" class="transform">
                                     <span class="el-dropdown-link">
                                         淘宝呗卖家中心<i class="el-icon-arrow-down el-icon--right"></i>
                                     </span>
                                 </a>
                                 <el-dropdown-menu slot="dropdown" class="header-new-drop">
-                                    <el-dropdown-item><span class="after-color">开店入驻</span></el-dropdown-item>
+                                    <el-dropdown-item><span class="after-color"><a href="/car">开店入驻</a></span></el-dropdown-item>
                                     <el-dropdown-item><span class="after-color">出售中的宝贝</span></el-dropdown-item>
                                     <el-dropdown-item><span class="after-color">卖家服务市场</span></el-dropdown-item>
                                 </el-dropdown-menu>
@@ -313,5 +308,11 @@
 }
 .nav-category-data .cate-menu .cate-menu-item .menu-item-tit {
     font-size: 12px;
+}
+.after-color a{
+    color:#606266
+}
+.after-color a:hover{
+    color:#000
 }
 </style>

@@ -4,7 +4,7 @@ import classification from "../components/classification.vue";
 import homepage from "../components/homepage.vue";
 import CarLogon from "../components/CarLogon.vue";
 import BuyerLogon from "../components/BuyerLogon.vue";
-import partculars from "../components/partculars.vue";
+import particulars from "../components/particulars.vue";
 
 const routes = [
     // 首页
@@ -40,8 +40,8 @@ const routes = [
         }
     },
     {
-        path: '/partculars',
-        component: partculars,
+        path: '/particulars',
+        component: particulars,
         mate:{
             title:'商品详情'
         }
