@@ -4,6 +4,7 @@ import classification from "../components/classification.vue";
 import homepage from "../components/homepage.vue";
 import CarLogon from "../components/CarLogon.vue";
 import BuyerLogon from "../components/BuyerLogon.vue";
+import partculars from "../components/partculars.vue";
 
 const routes = [
     // 首页
@@ -19,7 +20,7 @@ const routes = [
         path:'/classification',
         component:classification,
         meta:{
-            title:'商品分类'
+            title:'商品搜索分类'
         }
     },
     // 商家登录注册
@@ -36,6 +37,13 @@ const routes = [
         component: BuyerLogon,
         mate:{
             title:'用户登录/注册'
+        }
+    },
+    {
+        path: '/partculars',
+        component: partculars,
+        mate:{
+            title:'商品详情'
         }
     }
 ]

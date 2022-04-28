@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="homepage">
         <!-- 导航条组件 -->
         <Header></Header>
         <!-- 首页主体 -->
