@@ -24,6 +24,12 @@ import CarBack_Stage from "@/components/CarBack_Stage";
 import Personal_center from "@/components/Personal_center";
     // 个人信息
     import Personal from "@/components/Personal_center/Personal";
+    // 
+    import OrderAnagement from "@/components/Personal_center/OrderAnagement";
+    // 
+    import Property from "@/components/Personal_center/Property";
+    // 
+    import ShippingAddress from "@/components/Personal_center/ShippingAddress";
 
 
 const routes = [
@@ -114,7 +120,7 @@ const routes = [
             }
         ]
     },
-    /*商家后台管理系统*/
+    /*买家个人中心*/
     {
         path: "/Personal_center",
         component: Personal_center,
@@ -133,24 +139,33 @@ const routes = [
                     title: "个人信息"
                 }
             },
-            // /*买家评论*/
-            // {
-            //     path: 'comment',
-            //     name: 'comment',
-            //     component: Comment,
-            //     mate: {
-            //         title: "买家评论"
-            //     }
-            // },
-            // /*上架商品*/
-            // {
-            //     path: 'goodsshelves',
-            //     name: 'goodsshelves',
-            //     component: GoodsShelves,
-            //     mate: {
-            //         title: '上架商品'
-            //     }
-            // }
+            /*订单管理*/
+            {
+                path: 'OrderAnagement',
+                name: 'OrderAnagement',
+                component: OrderAnagement,
+                mate: {
+                    title: "订单管理"
+                }
+            },
+            /*个人资产*/
+            {
+                path: 'Property',
+                name: 'Property',
+                component: Property,
+                mate: {
+                    title: '个人资产'
+                }
+            },
+            // 收货地址
+            {
+                path: 'ShippingAddress',
+                name: 'ShippingAddress',
+                component: ShippingAddress,
+                mate: {
+                    title: '收货地址'
+                }
+            }
         ]
     }
 ]

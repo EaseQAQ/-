@@ -2,6 +2,7 @@
     <div id="homepage">
         <!-- 导航条组件 -->
         <Header></Header>
+        <Search></Search>
         <!-- 首页主体 -->
         <div class="index-content s_bg_top" style="background-image: url(https://b.appsimg.com/upload/momin/2022/01/26/116/1643187256307.jpg)">
             <!-- 轮播图 -->
@@ -144,6 +145,7 @@
 <script>
 import Header from './shared/header.vue'
 import Footer from './shared/footer.vue'
+import Search from './shared/search.vue'
 export default {
     name: "homepage",
     data() {
@@ -152,7 +154,7 @@ export default {
         }
     },
     components:{
-        Header,Footer
+        Header,Footer,Search
     }
 }
 </script>

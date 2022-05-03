@@ -1,47 +1,55 @@
 <template>
-    <!-- 买家 -->
-    <div class="stage">
-        <div class="stage_center">
-            <div class="stage_center_bot">
-                <el-row class="tac myapp" >
-                    <el-col :span="3" :style="GetWindowHeight" class="myapp">
-                        <el-menu :default-active="$route.path" class="el-menu-vertical-demo  myapp" @open="handleOpen" @close="handleClose"  :style="GetWindowHeight" >
-                            <router-link to="Personal">
-                                <el-menu-item index="/Personal_center/Personal  ">
-                                    <i class="el-icon-sell"></i>
-                                    <span slot="title">订单管理</span>
-                                </el-menu-item>
-                            </router-link>
-                            <router-link to="goodsshelves">
-                                <el-menu-item index="/carback_stage/goodsshelves">
-                                    <i class="el-icon-shopping-bag-1"></i>
-                                    <span slot="title">收货地址</span>
-                                </el-menu-item>
-                            </router-link>
-                            <router-link to="comment">
-                                <el-menu-item index="/carback_stage/comment">
-                                    <i class="el-icon-chat-line-square"></i>
-                                    <span slot="title">我的资产</span>
-                                </el-menu-item>
-                            </router-link>
-                            <router-link to="Personal">
-                                <el-menu-item index="/Personal_center/Personal  ">
-                                    <i class="el-icon-sell"></i>
-                                    <span slot="title">个人信息</span>
-                                </el-menu-item>
-                            </router-link>
-                        </el-menu>
-                    </el-col>
-                    <keep-alive>
-                        <router-view></router-view>
-                    </keep-alive>
-                </el-row>
+    <div>
+        <Header></Header>
+        <!-- 买家 -->
+        <div class="stage">
+            <div class="stage_center">
+                <div class="stage_center_bot">
+                    <el-row class="tac myapp" >
+                        <el-col :span="3" :style="GetWindowHeight" class="myapp">
+                            <el-menu :default-active="$route.path" class="el-menu-vertical-demo  myapp" @open="handleOpen" @close="handleClose"  :style="GetWindowHeight" >
+                                <router-link to="Personal">
+                                    <el-menu-item index="/Personal_center/Personal">
+                                        <i class="el-icon-sell"></i>
+                                        <span slot="title">个人信息</span>
+                                    </el-menu-item>
+                                </router-link>
+                                <router-link to="ShippingAddress">
+                                    <el-menu-item index="/Personal_center/ShippingAddress">
+                                        <i class="el-icon-shopping-bag-1"></i>
+                                        <span slot="title">收货地址</span>
+                                    </el-menu-item>
+                                </router-link>
+                                <router-link to="Property">
+                                    <el-menu-item index="/Personal_center/Property">
+                                        <i class="el-icon-chat-line-square"></i>
+                                        <span slot="title">我的资产</span>
+                                    </el-menu-item>
+                                </router-link>
+                                <router-link to="OrderAnagement">
+                                    <el-menu-item index="/Personal_center/OrderAnagement">
+                                        <i class="el-icon-sell"></i>
+                                        <span slot="title">订单管理</span>
+                                    </el-menu-item>
+                                </router-link>
+                            </el-menu>
+                        </el-col>
+                        <keep-alive>
+                            <router-view></router-view>
+                        </keep-alive>
+                    </el-row>
+                </div>
             </div>
         </div>
+        <Footer></Footer>
     </div>
+
+
 </template>
 
 <script>
+import Header from './shared/header.vue';
+import Footer from './shared/footer.vue';
     export default {
         name: "CarBack_Stage",
         data() {
@@ -55,7 +63,9 @@
             };
         },
         // import引入的组件需要注入到对象中才能使用
-        components: {},
+        components: {
+            Header,Footer
+        },
         // 生命周期 - 创建完成（可以访问当前this实例）
         created () {
             /*根据浏览器改高度*/
