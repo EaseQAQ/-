@@ -141,11 +141,6 @@
 </script>
 
 <style scoped>
-    .sonRoute{
-        position:absolute;
-        float: right;
-        left: 180px;
-    }
     /*导航条内的样式*/
     #shopphear{
         float: left;
