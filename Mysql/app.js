@@ -5,7 +5,7 @@ const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'root',
-    database: 'project'
+    database: 'shopping'
 });
 
 connection.connect((err) => {
@@ -19,7 +19,7 @@ const app = express()
 app.get('/getCategory', (req, res) => {
     //解决跨域
     res.set('Access-Control-Allow-Origin', '*')
-    connection.query('select * from test', (err, data, field) => {
+    connection.query('select * from tab_goods', (err, data, field) => {
         if (!err) {
             //返回查询数据
             res.send(data)

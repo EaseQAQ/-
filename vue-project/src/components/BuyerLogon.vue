@@ -188,7 +188,7 @@
     #centerimg {
         width: 100vm;
         height: 600px;
-        background-image: url('https://s2.loli.net/2022/04/26/NtCcgBqbjTveMo4.png');
+        background-image: url(https://s2.loli.net/2022/04/26/NtCcgBqbjTveMo4.png);
         background-position: top center;
         background-repeat: no-repeat;
         z-index: -1;

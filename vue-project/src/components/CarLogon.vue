@@ -77,6 +77,9 @@
           <el-form-item label="商家密码" prop="zpass" class="yongone">
             <el-input class="yong" type="password" v-model="zruleForm.zpass" autocomplete="off"  placeholder="密码6-10位"></el-input>
           </el-form-item>
+          <el-form-item label="店铺名字" prop="zname" class="yongone">
+            <el-input class="yong" type="text" v-model="zruleForm.zname" placeholder="请输入店铺名字，长度不能超过20"></el-input>
+          </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="zsubmitForm('zruleForm')">注册</el-button>
             <el-button @click="resetForm('zruleForm')">重置</el-button>
@@ -142,11 +145,19 @@ export default {
       // }, 1000);
     };
     let zvalidatePass = (rule, value, callback) => {
-      console.log(123)
       if (value === '') {
         callback(new Error('请输入密码'));
       } else if(value.length<6 || value.length>10){
         return callback(new Error('密码不规范'));
+      }else {
+        callback();
+      }
+    };
+    let zchexckname= (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入店铺名'));
+      } else if(value.length>20){
+        return callback(new Error('店铺名不规范'));
       }else {
         callback();
       }
@@ -171,7 +182,8 @@ export default {
       /*注册数据*/
       zruleForm: {
         zpass: '',
-        zage: ''
+        zage: '',
+        zname:'',
       },
       zrules: {
         zpass: [
@@ -179,6 +191,9 @@ export default {
         ],
         zage: [
           { validator: zcheckAge, trigger: 'blur' }
+        ],
+        zname:[
+          { validator: zchexckname, trigger: 'blur' }
         ]
       },
     };
