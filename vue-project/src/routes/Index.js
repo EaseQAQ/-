@@ -14,12 +14,16 @@ import BuyerLogon from "@/components/BuyerLogon";
 import AdminLogon from "@/components/AdminLogon";
 //商家后台管理系统
 import CarBack_Stage from "@/components/CarBack_Stage";
-/*商品信息*/
-import Commodity from "@/components/CarBack_Stage/Commodity";
-/*买家评论*/
-import Comment from "@/components/CarBack_Stage/Comment";
-/*上架商品*/
-import GoodsShelves from "@/components/CarBack_Stage/GoodsShelves";
+    /*商品信息*/
+    import Commodity from "@/components/CarBack_Stage/Commodity";
+    /*买家评论*/
+    import Comment from "@/components/CarBack_Stage/Comment";
+    /*上架商品*/
+    import GoodsShelves from "@/components/CarBack_Stage/GoodsShelves";
+// 个人中心
+import Personal_center from "@/components/Personal_center";
+    // 个人信息
+    import Personal from "@/components/Personal_center/Personal";
 
 
 const routes = [
@@ -108,6 +112,45 @@ const routes = [
                     title: '上架商品'
                 }
             }
+        ]
+    },
+    /*商家后台管理系统*/
+    {
+        path: "/Personal_center",
+        component: Personal_center,
+        mate: {
+            title: "买家个人中心"
+        },
+        /*默认设置打开个人信息*/
+        redirect: '/Personal_center/Personal',
+        children: [
+            /*个人信息*/
+            {
+                path: 'Personal',
+                name: 'Personal',
+                component: Personal,
+                mate: {
+                    title: "个人信息"
+                }
+            },
+            // /*买家评论*/
+            // {
+            //     path: 'comment',
+            //     name: 'comment',
+            //     component: Comment,
+            //     mate: {
+            //         title: "买家评论"
+            //     }
+            // },
+            // /*上架商品*/
+            // {
+            //     path: 'goodsshelves',
+            //     name: 'goodsshelves',
+            //     component: GoodsShelves,
+            //     mate: {
+            //         title: '上架商品'
+            //     }
+            // }
         ]
     }
 ]

@@ -23,3 +23,8 @@ a, a:hover {
     float: right;
     left: 180px;
 }
+.headline{
+    height: 50px;
+    margin: 30px 0;
+    border-bottom: 1px solid black;
+}

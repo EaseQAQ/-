@@ -1,8 +1,11 @@
 <template>
     <div class="sonRoute">
+        <div class="headline">
+            <h2>已上架的商品</h2>
+        </div>
         <!--导航功能-->
         <div class="filtrate">
-            <el-row class="demo-autocomplete">
+            <el-row>
                 <el-col :span="12">
                     <el-autocomplete
                     class="inline-input"
@@ -141,6 +144,9 @@
 </script>
 
 <style scoped>
+    .headline{
+        margin: 10px 0;
+    }
     /*导航条内的样式*/
     #shopphear{
         float: left;

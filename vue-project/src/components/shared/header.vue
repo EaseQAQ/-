@@ -88,7 +88,7 @@
                 <!-- logo -->
                 <div class="c-logo">
                     <div class="header-logo-dop">
-                        <a href="">
+                        <a href="/">
                             <img src="https://s2.loli.net/2022/04/26/fatzBqwgdC1y68K.png" alt height="100">
                         </a>
                     </div>
