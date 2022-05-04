@@ -2,7 +2,7 @@
     <div>
         <div class="sonRoute">
             <div class="headline">
-                <h2>商家管理</h2>
+                <h2>订单信息</h2>
             </div>
             <!--导航功能-->
             <div class="filtrate">
@@ -12,7 +12,7 @@
                         class="inline-input"
                         v-model="state1"
                         :fetch-suggestions="querySearch"
-                        placeholder="请输入商家名"
+                        placeholder="请输入订单号"
                         @select="handleSelect"
                         ></el-autocomplete>
                     </el-col>
@@ -20,24 +20,28 @@
                 </el-row>
             </div>
             <div class="information">
-                <div id="shoppnum">共<em>0</em>位商家</div>
+                <div id="shoppnum">共<em>0</em>单订单</div>
             </div>
             <!--表格-->
             <div class="tab">
                 <el-table :data="tableData" border style="width: 100%">
-                    <el-table-column type="selection" width="55">
+                    <el-table-column type="selection" width="39">
                     </el-table-column>
-                    <el-table-column fixed prop="shopName" label="店铺名" width="250">
+                    <el-table-column fixed prop="order" label="订单号" width="63">
                     </el-table-column>
-                    <el-table-column prop="sellerName" label="商家名" width="250">
+                    <el-table-column prop="time" label="下单时间" width="130">
                     </el-table-column>
-                    <el-table-column prop="commodity" label="商品分类" width="150">
+                    <el-table-column prop="money" label="下单金额" width="77">
                     </el-table-column>
-                    <el-table-column fixed="right" label="操作" width="100">
-                    <template slot-scope="scope">
-                        <el-button @click="handleClick(scope.row)" type="text" size="small">冻结</el-button>
-                        <el-button type="text" size="small">解冻</el-button>
-                    </template>
+                    <el-table-column prop="sign" label="签收时间" width="130">
+                    </el-table-column>
+                    <el-table-column prop="name" label="商品名" width="140">
+                    </el-table-column>
+                    <el-table-column prop="number" label="商品数量" width="77">
+                    </el-table-column>
+                    <el-table-column prop="site" label="收货地址" width="120">
+                    </el-table-column>
+                    <el-table-column prop="shopName" label="店铺名" width="120">
                     </el-table-column>
                 </el-table>
             </div>
@@ -47,11 +51,8 @@
 
 <script>
     export default {
-        name: "Merchant",
+        name: "OrderM",
         methods: {
-            handleClick(row) {
-                console.log(row);
-            },
             querySearch(queryString, cb) {
                 var restaurants = this.restaurants;
                 var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
@@ -125,9 +126,14 @@
         data() {
             return {
                 tableData: [{
-                    shopName: '大大王',
-                    sellerName: '打算',
-                    commodity: '你倒是',
+                    order: '1',
+                    time: '2022-05-03',
+                    money: '100',
+                    sign: '2022-05-03',
+                    name: '撒大大的',
+                    number:'10',
+                    site:'ssssss',
+                    shopName:'大大王'
                 }],
                     restaurants: [],
                     state1: '',

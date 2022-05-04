@@ -46,7 +46,12 @@
                                     <span slot="title">上架商品</span>
                                 </el-menu-item>
                             </router-link>
-
+                            <router-link to="OrderM">
+                                <el-menu-item index="/carback_stage/OrderM">
+                                    <i class="el-icon-shopping-bag-1"></i>
+                                    <span slot="title">订单信息</span>
+                                </el-menu-item>
+                            </router-link>
                         </el-menu>
                     </el-col>
                     <keep-alive>

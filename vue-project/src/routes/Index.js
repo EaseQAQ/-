@@ -19,6 +19,8 @@ import CarBack_Stage from "@/components/CarBack_Stage";
     import Comment from "@/components/CarBack_Stage/Comment";
     /*上架商品*/
     import GoodsShelves from "@/components/CarBack_Stage/GoodsShelves";
+    /*订单信息*/
+    import OrderM from "@/components/CarBack_Stage/OrderM";
 // 个人中心
 import Personal_center from "@/components/Personal_center";
     // 个人信息
@@ -129,6 +131,14 @@ const routes = [
                 component: GoodsShelves,
                 mate: {
                     title: '上架商品'
+                }
+            },
+            {
+                path: 'OrderM',
+                name: 'OrderM',
+                component: OrderM,
+                mate: {
+                    title: '订单信息'
                 }
             }
         ]

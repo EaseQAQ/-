@@ -144,46 +144,5 @@
 </script>
 
 <style scoped>
-    .headline{
-        margin: 10px 0;
-    }
-    /*导航条内的样式*/
-    #shopphear{
-        float: left;
-    }
-    #shoppnum{
-        float: right;
-    }
-    #alldel{
-        margin-left: 30px;
-        float: left;
-        width: 88px;
-        height: 36px;
-        border-radius: var(--btn-size-m-corner,500px);
-        line-height: 36px;
-        text-align: center;
-        border: 1px solid #999999;
-    }
-    .filtrate{
-        position: relative;
-        top: 20px;
-    }
-    .information{
-        position: relative;
-        top: 50px;
-    }
-    .tab{
-        position: relative;
-        top: 70px;
-    }
-    .demo-autocomplete{
-        width: 500px;
-        float: left;
-    }
-    .block{
-        float:right;
-    }
-    .el-col-12{
-        width: 205px;
-    }
+    
 </style>

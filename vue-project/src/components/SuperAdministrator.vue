@@ -8,19 +8,19 @@
                             <router-link to="AdministratorList">
                                 <el-menu-item index="/SuperAdministrator/AdministratorList">
                                     <i class="el-icon-sell"></i>
-                                    <span slot="title">订单信息</span>
+                                    <span slot="title">管理员列表</span>
                                 </el-menu-item>
                             </router-link>
                             <router-link to="MerchantList">
                                 <el-menu-item index="/SuperAdministrator/MerchantList">
                                     <i class="el-icon-chat-line-square"></i>
-                                    <span slot="title">商家信息</span>
+                                    <span slot="title">商家列表</span>
                                 </el-menu-item>
                             </router-link>
                             <router-link to="UsersList">
                                 <el-menu-item index="/SuperAdministrator/UsersList">
                                     <i class="el-icon-shopping-bag-1"></i>
-                                    <span slot="title">上架申请</span>
+                                    <span slot="title">用户列表</span>
                                 </el-menu-item>
                             </router-link>
                         </el-menu>

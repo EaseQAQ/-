@@ -1,7 +1,7 @@
 <template>
     <div class="sonRoute">
         <div class="headline">
-            <h2>基本信息</h2>
+            <h2>需上架的商品信息</h2>
         </div>
         <el-form ref="form" :model="form" label-width="80px">
             <el-form-item label="商品标题">
@@ -71,7 +71,5 @@
 </script>
 
 <style scoped>
-.sonRoute{
-    left: 380px;
-}
+
 </style>
