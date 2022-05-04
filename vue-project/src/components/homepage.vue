@@ -139,12 +139,12 @@
             </div>
         </div>
         <!-- 底部 -->
-        <Footer></Footer>
+        <Base></Base>
     </div>
 </template>
 <script>
 import Header from './shared/header.vue'
-import Footer from './shared/footer.vue'
+import Base from './shared/base.vue'
 import Search from './shared/search.vue'
 export default {
     name: "homepage",
@@ -154,7 +154,7 @@ export default {
         }
     },
     components:{
-        Header,Footer,Search
+        Header,Base,Search
     }
 }
 </script>

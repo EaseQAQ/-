@@ -1,6 +1,6 @@
 <template>
     <div>
-        我是个人资产
+        我是资产
     </div>
 </template>
 

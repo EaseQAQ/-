@@ -2,6 +2,7 @@
     <div id="Classification">
         <!-- 头部 -->
         <Header></Header>
+        <Search></Search>
         <!-- 筛选 -->
         <Screen></Screen>
         <div class="c-goods-list">
@@ -209,14 +210,15 @@
             </div>
         </div>
         <!-- 底部 -->
-        <Footer></Footer>
+        <Base></Base>
     </div>
 </template>
 
 <script>
 import Header from './shared/header.vue'
 import Screen from './shared/screen.vue'
-import Footer from './shared/footer.vue'
+import Base from './shared/base.vue'
+import Search from './shared/search.vue'
 export default {
     name: "Classification",
     data() {
@@ -225,7 +227,8 @@ export default {
         }
     },
     components:{
-        Header,Screen,Footer
+        Header,Screen,Base,
+        Search
     }
 }
 </script>

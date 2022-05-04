@@ -24,11 +24,9 @@ import CarBack_Stage from "@/components/CarBack_Stage";
 import Personal_center from "@/components/Personal_center";
     // 个人信息
     import Personal from "@/components/Personal_center/Personal";
-    // 
-    import OrderAnagement from "@/components/Personal_center/OrderAnagement";
-    // 
+    // 个人资产
     import Property from "@/components/Personal_center/Property";
-    // 
+    // 收货地址
     import ShippingAddress from "@/components/Personal_center/ShippingAddress";
 
 
@@ -137,15 +135,6 @@ const routes = [
                 component: Personal,
                 mate: {
                     title: "个人信息"
-                }
-            },
-            /*订单管理*/
-            {
-                path: 'OrderAnagement',
-                name: 'OrderAnagement',
-                component: OrderAnagement,
-                mate: {
-                    title: "订单管理"
                 }
             },
             /*个人资产*/

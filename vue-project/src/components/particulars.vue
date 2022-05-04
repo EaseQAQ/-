@@ -1,6 +1,7 @@
 <template>
     <div id="partculars">
         <Header></Header>
+        <Search></Search>
         <div class="FW-product clearfix">
             <div class="M-class">
                 <div class="M-pic">
@@ -21,12 +22,13 @@
                 </div>
             </div>
         </div>
-        <Footer></Footer>
+        <Base></Base>
     </div>
 </template>
 <script>
 import Header from './shared/header.vue'
-import Footer from './shared/footer.vue'
+import Base from './shared/base.vue'
+import Search from './shared/search.vue'
 export default {
     name: "partculars",
     data() {
@@ -35,7 +37,8 @@ export default {
         }
     },
     components:{
-        Header,Footer
+        Header,Base,
+        Search
     }
     }
 </script>

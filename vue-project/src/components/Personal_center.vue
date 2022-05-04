@@ -26,12 +26,6 @@
                                         <span slot="title">我的资产</span>
                                     </el-menu-item>
                                 </router-link>
-                                <router-link to="OrderAnagement">
-                                    <el-menu-item index="/Personal_center/OrderAnagement">
-                                        <i class="el-icon-sell"></i>
-                                        <span slot="title">订单管理</span>
-                                    </el-menu-item>
-                                </router-link>
                             </el-menu>
                         </el-col>
                         <keep-alive>
@@ -41,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <Footer></Footer>
+        <Base></Base>
     </div>
 
 
@@ -49,7 +43,7 @@
 
 <script>
 import Header from './shared/header.vue';
-import Footer from './shared/footer.vue';
+import Base from './shared/base.vue';
     export default {
         name: "CarBack_Stage",
         data() {
@@ -64,7 +58,7 @@ import Footer from './shared/footer.vue';
         },
         // import引入的组件需要注入到对象中才能使用
         components: {
-            Header,Footer
+            Header,Base
         },
         // 生命周期 - 创建完成（可以访问当前this实例）
         created () {
