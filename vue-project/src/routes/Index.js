@@ -1,5 +1,4 @@
 import VueRouter from 'vue-router'
-
 //首页
 import homepage from "@/components/homepage.vue";
 //商品详情页
@@ -28,6 +27,22 @@ import Personal_center from "@/components/Personal_center";
     import Property from "@/components/Personal_center/Property";
     // 收货地址
     import ShippingAddress from "@/components/Personal_center/ShippingAddress";
+// 普通管理员
+import Administrator from "@/components/Administrator"
+    // 订单信息
+    import OrderManagement from "@/components/Administrator/OrderManagement";
+    // 商家信息
+    import Merchant from "@/components/Administrator/Merchant";
+    // 上架申请
+    import ApplyFor from "@/components/Administrator/ApplyFor";
+// 超级管理员
+import SuperAdministrator from "@/components/SuperAdministrator"
+    // 订单信息
+    import AdministratorList from "@/components/SuperAdministrator/AdministratorList";
+    // 商家信息
+    import MerchantList from "@/components/SuperAdministrator/MerchantList";
+    // 上架申请
+    import UsersList from "@/components/SuperAdministrator/UsersList";
 
 
 const routes = [
@@ -153,6 +168,84 @@ const routes = [
                 component: ShippingAddress,
                 mate: {
                     title: '收货地址'
+                }
+            }
+        ]
+    },
+    /*普通管理员*/
+    {
+        path: "/Administrator",
+        component: Administrator,
+        mate: {
+            title: "普通管理员"
+        },
+        /*默认设置打开订单信息*/
+        redirect: '/Administrator/OrderManagement',
+        children: [
+            /*订单信息*/
+            {
+                path: 'OrderManagement',
+                name: 'OrderManagement',
+                component: OrderManagement,
+                mate: {
+                    title: "订单信息"
+                }
+            },
+            /*商家信息*/
+            {
+                path: 'Merchant',
+                name: 'Merchant',
+                component: Merchant,
+                mate: {
+                    title: '商家信息'
+                }
+            },
+            // 上架申请
+            {
+                path: 'ApplyFor',
+                name: 'ApplyFor',
+                component: ApplyFor,
+                mate: {
+                    title: '上架申请'
+                }
+            }
+        ]
+    },
+    /*超级管理员*/
+    {
+        path: "/SuperAdministrator",
+        component: SuperAdministrator,
+        mate: {
+            title: "超级管理员"
+        },
+        /*默认设置打开订单信息*/
+        redirect: '/SuperAdministrator/AdministratorList',
+        children: [
+            /*管理员列表*/
+            {
+                path: 'AdministratorList',
+                name: 'AdministratorList',
+                component: AdministratorList,
+                mate: {
+                    title: "管理员列表"
+                }
+            },
+            /*商家列表*/
+            {
+                path: 'MerchantList',
+                name: 'MerchantList',
+                component: MerchantList,
+                mate: {
+                    title: '商家列表'
+                }
+            },
+            // 用户列表
+            {
+                path: 'UsersList',
+                name: 'UsersList',
+                component: UsersList,
+                mate: {
+                    title: '用户列表'
                 }
             }
         ]
