@@ -1,5 +1,26 @@
-<template>
-    <div class="stage">
+    <template>
+        <div class="stage">
+            <div class="stage_center_heat">
+            <!-- 普通管理员 -->
+                <div class="center_heat">
+                    <div class="heat_name">
+                        <a href="">管理员</a>
+                    </div>
+                    <div class="seller">
+                        <div class="vendor">
+                        <el-dropdown>
+                            <span class="el-dropdown-link">
+                                123111222<i class="el-icon-arrow-down el-icon--right"></i>
+                            </span>
+                            <br>
+                            <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item>退出</el-dropdown-item>
+                            </el-dropdown-menu>
+                        </el-dropdown>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <div class="stage_center">
             <div class="stage_center_bot">
                 <el-row class="tac myapp" >

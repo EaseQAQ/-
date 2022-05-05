@@ -113,3 +113,29 @@ a, a:hover {
 .filtrate .el-input{
     width: 205px;
 }
+/*导航条*/
+.stage_center_heat{
+    height:60px;
+    background-color: white;
+    margin-bottom: 50px;
+}
+.heat_name{
+    margin-left: 10px;
+    font-size: 32px;
+    float: left;
+    line-height: 55px;
+}
+.center_heat{
+    width: 1200px;
+    margin: 0 auto  ;
+}
+.seller{
+    margin-top: 10px;
+    float:right;
+}
+.portrait{
+    float: left;
+}
+.vendor{
+    float: left;
+}

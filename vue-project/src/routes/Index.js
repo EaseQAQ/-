@@ -11,6 +11,8 @@ import CarLogon from "@/components/CarLogon";
 import BuyerLogon from "@/components/BuyerLogon";
 //管理员登录系统
 import AdminLogon from "@/components/AdminLogon";
+/*购物车*/
+import ShopTrolley from "@/components/ShopTrolley";
 //商家后台管理系统
 import CarBack_Stage from "@/components/CarBack_Stage";
     /*商品信息*/
@@ -94,6 +96,14 @@ const routes = [
         component: AdminLogon,
         mate: {
             title: "管理员登录"
+        }
+    },
+    // 购物车
+    {
+        path: '/shoptrolley',
+        component: ShopTrolley,
+        mate: {
+            title:'购物车'
         }
     },
     /*商家后台管理系统*/
