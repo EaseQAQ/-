@@ -18,9 +18,9 @@
                                 <p>智源</p>
                             </div>                            
                         </div>
-                        <div class="c-goods-item-bottom    ">
-                            <div class="c-goods-item__price  c-goods-item__price--one-line  ">
-                                <div class="c-goods-item__main-price     J-goods-item__main-price">
+                        <div class="c-goods-item-bottom">
+                            <div class="c-goods-item__price  c-goods-item__price--one-line">
+                                <div class="c-goods-item__main-price J-goods-item__main-price">
                                     <div class="c-goods-item__sale-price J-goods-item__sale-price"><span>¥</span>1680</div>
                                 </div>
                             </div>
@@ -261,7 +261,6 @@ img {
     min-height: 300px;
     margin-top: 20px;
     position: relative;
-    z-index: 9;
 }
 .c-goods-list-inner {
     width: 1020px;

@@ -30,13 +30,15 @@
             <el-table :data="tableData" border style="width: 100%">
                 <el-table-column type="selection" width="55">
                 </el-table-column>
-                <el-table-column fixed prop="product" label="商品名称" width="280">
+                <el-table-column fixed prop="product" label="商品名称" width="230">
                 </el-table-column>
-                <el-table-column prop="price" label="价格" width="160">
+                <el-table-column prop="price" label="价格" width="100">
                 </el-table-column>
-                <el-table-column prop="inventory" label="库存" width="160">
+                <el-table-column prop="inventory" label="库存" width="100">
                 </el-table-column>
-                <el-table-column prop="salesVolume" label="销量" width="160">
+                <el-table-column prop="salesVolume" label="销量" width="100">
+                </el-table-column>
+                <el-table-column prop="classify" label="分类" width="160">
                 </el-table-column>
                 <el-table-column fixed="right" label="操作" width="100">
                 <template slot-scope="scope">
@@ -133,7 +135,7 @@
                     price: '12',
                     inventory: '30',
                     salesVolume: '0',
-                    creationTime: '2022-05-03',
+                    classify:'萨达'
                 }],
                     restaurants: [],
                     state1: '',

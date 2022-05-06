@@ -1,4 +1,4 @@
-import VueRouter from 'vue-router'
+import VueRouter from 'vue-router';
 //首页
 import homepage from "@/components/homepage.vue";
 //商品详情页
@@ -36,7 +36,7 @@ import Administrator from "@/components/Administrator"
     // 订单信息
     import OrderManagement from "@/components/Administrator/OrderManagement";
     // 商家信息
-    import Merchant from "@/components/Administrator/Merchant";
+    import merchandise from "@/components/Administrator/merchandise";
     // 上架申请
     import ApplyFor from "@/components/Administrator/ApplyFor";
 // 超级管理员
@@ -52,42 +52,42 @@ import SuperAdministrator from "@/components/SuperAdministrator"
 const routes = [
     // 首页
     {
-        path:'/',
-        component:homepage,
-        meta:{
-            title:'首页'
+        path: '/',
+        component: homepage,
+        meta: {
+            title: '首页'
         }
     },
     // 商品分类
     {
-        path:'/classification',
-        component:classification,
-        meta:{
-            title:'商品搜索分类'
+        path: '/classification',
+        component: classification,
+        meta: {
+            title: '商品搜索分类'
         }
     },
     // 商家登录注册
     {
         path: '/car',
-        component:CarLogon,
-        meta:{
-            title:'商家登录/注册'
+        component: CarLogon,
+        meta: {
+            title: '商家登录/注册'
         }
     },
     //买家登录注册
     {
         path: '/buyerlogon',
         component: BuyerLogon,
-        mate:{
-            title:'用户登录/注册'
+        mate: {
+            title: '用户登录/注册'
         }
     },
     //商品详情
     {
         path: '/particulars',
         component: particulars,
-        mate:{
-            title:'商品详情'
+        mate: {
+            title: '商品详情'
         }
     },
     /*管理员登录组件*/
@@ -103,7 +103,7 @@ const routes = [
         path: '/shoptrolley',
         component: ShopTrolley,
         mate: {
-            title:'购物车'
+            title: '购物车'
         }
     },
     /*商家后台管理系统*/
@@ -116,8 +116,7 @@ const routes = [
         /*默认设置打开商品信息页面*/
         redirect: '/carback_stage/commodity',
         /*商品信息页面*/
-        children: [
-            {
+        children: [{
                 path: 'commodity',
                 name: 'commodity',
                 component: Commodity,
@@ -213,11 +212,11 @@ const routes = [
             },
             /*商家信息*/
             {
-                path: 'Merchant',
-                name: 'Merchant',
-                component: Merchant,
+                path: 'merchandise',
+                name: 'merchandise',
+                component: merchandise,
                 mate: {
-                    title: '商家信息'
+                    title: '商品类型'
                 }
             },
             // 上架申请
@@ -273,15 +272,15 @@ const routes = [
 ]
 
 // 3. 创建 router 实例,并将其暴露出去
-const router=new VueRouter({
-    mode:'history',  
-    routes
-})
-// 全局后置路由守卫
+const router = new VueRouter({
+        mode: 'history',
+        routes
+    })
+    // 全局后置路由守卫
 router.afterEach((to, from) => {
     console.log('目标路由你已经访问完毕.....')
-    document.querySelector('title').innerText=to.meta.title;
+    document.querySelector('title').innerText = to.meta.title;
 })
 
 // 5、暴露 router 对象
-export  default  router;
+export default router;

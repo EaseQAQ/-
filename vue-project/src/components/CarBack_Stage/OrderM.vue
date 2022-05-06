@@ -29,6 +29,8 @@
                     </el-table-column>
                     <el-table-column fixed prop="order" label="订单号" width="63">
                     </el-table-column>
+                    <el-table-column prop="userName" label="用户名" width="130">
+                    </el-table-column>
                     <el-table-column prop="time" label="下单时间" width="130">
                     </el-table-column>
                     <el-table-column prop="money" label="下单金额" width="77">
@@ -41,7 +43,7 @@
                     </el-table-column>
                     <el-table-column prop="site" label="收货地址" width="120">
                     </el-table-column>
-                    <el-table-column prop="shopName" label="店铺名" width="120">
+                    <el-table-column prop="consignee" label="收货人" width="120">
                     </el-table-column>
                 </el-table>
             </div>
@@ -128,12 +130,13 @@
                 tableData: [{
                     order: '1',
                     time: '2022-05-03',
+                    userName:'asda',
                     money: '100',
                     sign: '2022-05-03',
                     name: '撒大大的',
                     number:'10',
                     site:'ssssss',
-                    shopName:'大大王'
+                    consignee:'大大王'
                 }],
                     restaurants: [],
                     state1: '',

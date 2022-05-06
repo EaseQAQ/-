@@ -1,51 +1,51 @@
 <template>
     <!-- 筛选 -->
     <div class="list-define-w wrapper">
-            <div class="pro-list-oper">
-                <!-- 筛选左 -->
-                <div class="pro-oper">
-                    <!--  -->
-                    <div class="oper-hd-general J_oper_tag" title="综合">
-                        <p>综合</p>
-                    </div>
-                    <!--  -->
-                    <div class="oper-hd-price J_oper_tag" title="销量">
-                        <p>销量</p>
-                    </div>
-                    <!--  -->
-                    <div class="oper-hd-discot J_oper_tag" title="价格">
-                        <p>价格</p>
-                    </div>
-                    <!-- 价格填写 -->
-                    <div class="oper-hd-select clearfix">
-                        <div class="oper-select-inner">
-                            <span class="oper-select-star">
-                                <input type="text" placeholder=" ¥" value="¥" class="J_priceMin">
-                                <em class="cat-select-tips J_placeholder"> ¥</em>
-                            </span>
-                            <i class="i-cat-pre"> - </i>
-                            <span class="oper-select-end">
-                                <input type="text" placeholder=" ¥" value="¥" class="J_priceMax">
-                                <em class="cat-select-tips J_placeholder"> ¥</em>
-                            </span>
-                            <i class="J_sortSubmit_btn i-cat-btn" mars_sead="prize_screen_add" title="确定">确定</i>
-                            <i class="J_priceClear i-cat-btn" mars_sead="prize_screen_cut" title="清除">清除</i>
-                        </div>
-                    </div>
+        <div class="pro-list-oper">
+            <!-- 筛选左 -->
+            <div class="pro-oper">
+                <!--  -->
+                <div class="oper-hd-general J_oper_tag" title="综合">
+                    <p>综合</p>
                 </div>
-                <!-- 筛选右 -->
-                <div id="J_page_special" class="page pro-paging">
-                    <span class="page-total">
-                        <em class="page-nub">......</em>件商品
-                    </span>
-                    <span><em class="page-nub">.</em>/..</span>
-                    <el-button-group style="margin-left:15px">
-                        <el-button type="primary" icon="el-icon-arrow-left" size="mini"></el-button>
-                        <el-button type="primary" size="mini">下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button>
-                    </el-button-group>
+                <!--  -->
+                <div class="oper-hd-price J_oper_tag" title="销量">
+                    <p>销量</p>
+                </div>
+                <!--  -->
+                <div class="oper-hd-discot J_oper_tag" title="价格">
+                    <p>价格</p>
+                </div>
+                <!-- 价格填写 -->
+                <div class="oper-hd-select clearfix">
+                    <div class="oper-select-inner">
+                        <span class="oper-select-star">
+                            <input type="text" placeholder=" ¥" value="¥" class="J_priceMin">
+                            <em class="cat-select-tips J_placeholder"> ¥</em>
+                        </span>
+                        <i class="i-cat-pre"> - </i>
+                        <span class="oper-select-end">
+                            <input type="text" placeholder=" ¥" value="¥" class="J_priceMax">
+                            <em class="cat-select-tips J_placeholder"> ¥</em>
+                        </span>
+                        <i class="J_sortSubmit_btn i-cat-btn" mars_sead="prize_screen_add" title="确定">确定</i>
+                        <i class="J_priceClear i-cat-btn" mars_sead="prize_screen_cut" title="清除">清除</i>
+                    </div>
                 </div>
             </div>
+            <!-- 筛选右 -->
+            <div id="J_page_special" class="page pro-paging">
+                <span class="page-total">
+                    <em class="page-nub">......</em>件商品
+                </span>
+                <span><em class="page-nub">.</em>/..</span>
+                <el-button-group style="margin-left:15px">
+                    <el-button type="primary" icon="el-icon-arrow-left" size="mini"></el-button>
+                    <el-button type="primary" size="mini">下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button>
+                </el-button-group>
+            </div>
         </div>
+    </div>
 </template>
 <script>
 export default {

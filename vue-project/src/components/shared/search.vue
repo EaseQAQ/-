@@ -41,6 +41,23 @@
                             <li class="cate-menu-item"><span class="menu-item-tit">唯品生活</span></li>
                             <li class="cate-menu-item"><span class="menu-item-tit">医药健康</span></li>
                         </ul>
+                        <div class="cate-pop">
+                            <div class="cate-part">
+                                <div class="cate-part-col1">
+                                    <div class="cate-detail">
+                                        <dl class="cate-detail-item">
+                                            <dt class="cate-detail-tit">
+                                                <i class="vipFont">></i>
+                                                <span>女士热销分类</span>
+                                            </dt>
+                                            <dd class="cate-detail-con">
+                                                <a target="_blank" class="J_category3" href="//list.vip.com/autolist.html?rule_id=53986299&amp;title=%E8%A1%AC%E8%A1%AB&amp;refer_url=https%3A%2F%2Fcategory.vip.com%2Fhome">衬衫</a>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- 分类 end -->
                     </li>
@@ -146,15 +163,13 @@ export default {
 }
 .nav-category-data {
     position: absolute;
-    z-index: 2;
+    z-index: 99;
     color: #fff;
 }
 .cate-menu{
     display: none;
     width: 156px;
-    background-color: #ff4400
-    
-    ;
+    background-color: #ff4400;
     -webkit-transition: .2s linear;
     transition: .2s linear;
     padding: 0 0 1px;
@@ -185,5 +200,71 @@ export default {
 }
 .after-color a:hover{
     color:#000
+}
+/*具体分类*/
+.nav-category-data .cate-pop {
+    /* display: none; */
+    background-color: #fff;
+    position: absolute;
+    left: 156px;
+    top: 0;
+    width: 844px;
+    height: 495px;
+    box-shadow: 2px 2px 3px 0 rgb(0 0 0 / 10%);
+}
+.cate-part {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+.cate-part-col1 {
+    float: left;
+    width: 519px;
+    padding: 16px 40px 16px 40px;
+    max-height: 462px;
+    border-top: 1px solid #eee;
+}
+.cate-detail-item {
+    margin-bottom: 24px;
+    position: relative;
+    font-size: 12px;
+}
+.cate-detail-tit {
+    line-height: 22px;
+    position: absolute;
+    left: 0;
+    width: 83px;
+    color: #222;
+    overflow: hidden;
+}
+.vipFont{
+    width: 10px;
+    vertical-align: middle;
+    float: right;
+}
+.cate-detail-tit span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    width: 72px;
+    font-weight: 700;
+}
+.cate-detail .cate-detail-con {
+    line-height: 22px;
+    width: 425px;
+    margin-left: 95px;
+    overflow: hidden;
+    word-break: keep-all;
+}
+.cate-detail-con a {
+    color: #666;
+    margin-right: 10px;
+}
+.cate-detail-con a:hover {
+    color: #ff4400;
 }
 </style>

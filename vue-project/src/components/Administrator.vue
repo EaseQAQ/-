@@ -32,10 +32,10 @@
                                     <span slot="title">订单信息</span>
                                 </el-menu-item>
                             </router-link>
-                            <router-link to="Merchant">
-                                <el-menu-item index="/Administrator/Merchant">
+                            <router-link to="merchandise">
+                                <el-menu-item index="/Administrator/merchandise">
                                     <i class="el-icon-chat-line-square"></i>
-                                    <span slot="title">商家信息</span>
+                                    <span slot="title">商品类型</span>
                                 </el-menu-item>
                             </router-link>
                             <router-link to="ApplyFor">

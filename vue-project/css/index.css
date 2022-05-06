@@ -8,6 +8,9 @@ ul{
 em, i {
     font-style: normal;
 }
+a, img {
+    vertical-align: top;
+}
 a, a:hover {
     text-decoration: none;
 }

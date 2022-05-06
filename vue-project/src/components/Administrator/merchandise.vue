@@ -20,23 +20,24 @@
                 </el-row>
             </div>
             <div class="information">
-                <div id="shoppnum">共<em>0</em>位商家</div>
+                <div id="shopphear">
+                    <el-button type="primary" round>新增类型</el-button>
+                    <el-button type="primary" round>批量删除</el-button>
+                </div>
+                <div id="shoppnum">共<em>0</em>种商品类型</div>
             </div>
             <!--表格-->
             <div class="tab">
                 <el-table :data="tableData" border style="width: 100%">
                     <el-table-column type="selection" width="55">
                     </el-table-column>
-                    <el-table-column fixed prop="shopName" label="店铺名" width="250">
-                    </el-table-column>
-                    <el-table-column prop="sellerName" label="商家名" width="250">
-                    </el-table-column>
-                    <el-table-column prop="commodity" label="商品分类" width="150">
+                    <el-table-column fixed prop="shopName" label="商品类型" width="250">
                     </el-table-column>
                     <el-table-column fixed="right" label="操作" width="100">
                     <template slot-scope="scope">
                         <el-button @click="handleClick(scope.row)" type="text" size="small">冻结</el-button>
                         <el-button type="text" size="small">解冻</el-button>
+                        <el-button type="text" size="small">删除</el-button>
                     </template>
                     </el-table-column>
                 </el-table>
@@ -47,7 +48,7 @@
 
 <script>
     export default {
-        name: "Merchant",
+        name: "merchandise",
         methods: {
             handleClick(row) {
                 console.log(row);
@@ -126,8 +127,6 @@
             return {
                 tableData: [{
                     shopName: '大大王',
-                    sellerName: '打算',
-                    commodity: '你倒是',
                 }],
                     restaurants: [],
                     state1: '',

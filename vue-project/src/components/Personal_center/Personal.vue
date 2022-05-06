@@ -21,9 +21,6 @@
             <el-form-item label="电话号码">
                 <el-input v-model="form.ipone"></el-input>
             </el-form-item>
-            <el-form-item label="邮箱">
-                <el-input v-model="form.emlia"></el-input>
-            </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="onSubmit">保存</el-button>
             </el-form-item>
@@ -40,7 +37,6 @@
                     name: '',
                     pwd: '',
                     ipone: '',
-                    emlia: ''
                 }
             }
         },
