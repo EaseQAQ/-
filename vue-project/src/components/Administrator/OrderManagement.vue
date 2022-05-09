@@ -24,24 +24,28 @@
             </div>
             <!--表格-->
             <div class="tab">
-                <el-table :data="tableData" border style="width: 100%">
+                <el-table :data="userlist" border style="width: 100%">
                     <el-table-column type="selection" width="39">
                     </el-table-column>
-                    <el-table-column fixed prop="order" label="订单号" width="63">
+                    <el-table-column fixed prop="order_id" label="订单号" width="63">
                     </el-table-column>
-                    <el-table-column prop="time" label="下单时间" width="130">
+                    <el-table-column prop="order_time" label="下单时间" width="120">
                     </el-table-column>
-                    <el-table-column prop="money" label="下单金额" width="77">
+                    <el-table-column prop="order_sum" label="下单金额" width="77">
                     </el-table-column>
-                    <el-table-column prop="sign" label="签收时间" width="130">
+                    <el-table-column prop="order_done" label="签收时间" width="120">
                     </el-table-column>
-                    <el-table-column prop="name" label="商品名" width="140">
+                    <el-table-column prop="goods_name" label="商品名" width="100">
                     </el-table-column>
-                    <el-table-column prop="number" label="商品数量" width="77">
+                    <el-table-column prop="detail_count" label="商品数量" width="77">
                     </el-table-column>
-                    <el-table-column prop="site" label="收货地址" width="120">
+                    <el-table-column prop="sel_store" label="店铺名" width="80">
                     </el-table-column>
-                    <el-table-column prop="shopName" label="店铺名" width="120">
+                    <el-table-column prop="addr_local" label="收货地址" width="100">
+                    </el-table-column>
+                    <el-table-column prop="addr_person" label="收货人" width="65">
+                    </el-table-column>
+                    <el-table-column prop="addr_phone" label="收货人电话" width="100">
                     </el-table-column>
                 </el-table>
             </div>
@@ -122,22 +126,20 @@
         },
         mounted() {
             this.restaurants = this.loadAll();
+            this.axios.get('http://localhost:8080/merchant/admin/order').then((response) => {
+                this.userlist =response.data
+                console.log(this.userlist);
+            }).catch(err=>{
+                console.log("获取数据失败" + err);
+            }),
+            this.restaurants = this.userlist;
         },
         data() {
             return {
-                tableData: [{
-                    order: '1',
-                    time: '2022-05-03',
-                    money: '100',
-                    sign: '2022-05-03',
-                    name: '撒大大的',
-                    number:'10',
-                    site:'ssssss',
-                    shopName:'大大王'
-                }],
-                    restaurants: [],
-                    state1: '',
-                    state2: ''
+                userlist: [],
+                restaurants: [],
+                state1: '',
+                state2: ''
             }
         }
     }

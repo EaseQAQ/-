@@ -14,8 +14,8 @@
                 <!-- 搜索 -->
                 <div class="c-search">
                     <div class="c-search-form">
-                    <el-input placeholder="请输入内容" v-model="input" clearable></el-input>
-                        <el-button type="primary" icon="el-icon-search">搜索</el-button>
+                    <el-input placeholder="请输入内容" clearable></el-input>
+                    <el-button type="primary" icon="el-icon-search">搜索</el-button>
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@
                     </div>
                     <!-- 分类 end -->
                     </li>
-                    <li><a href="" class="main-nav-atag">美妆</a></li>
+                    <li><a href="#" class="main-nav-atag">美妆</a></li>
                     <li><a href="" class="main-nav-atag">女装</a></li>
                     <li><a href="" class="main-nav-atag">运动</a></li>
                     <li><a href="" class="main-nav-atag">鞋包</a></li>
@@ -203,7 +203,7 @@ export default {
 }
 /*具体分类*/
 .nav-category-data .cate-pop {
-    /* display: none; */
+    display: none;
     background-color: #fff;
     position: absolute;
     left: 156px;

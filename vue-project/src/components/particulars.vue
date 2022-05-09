@@ -33,14 +33,15 @@
                         <div class="sp-info">
                             <div class="price-v6-line-one">
                                 <i class="pbox-yen">¥</i>
-                                <span title="413" class="sp-price">413</span>
+                                <span title="413" class="sp-price">84</span>
                                 <span class="sp-postfix">
                                     <span class="priceV6-content">
                                         <span class="fullReductionV6">
                                             <span class="lable_img">
-                                                <img src="//shop.vipstatic.com/img/detail/price/pc_pricelabel_left-hash-b2b6492f.png">
-                                            </span>
+                                                    <img src="//shop.vipstatic.com/img/detail/price/pc_pricelabel_left-hash-b2b6492f.png">
+                                                </span>
                                             <span class="price-v6-special">
+                                                
                                                 <span class="special-title">会员价</span>
                                                 <span class="special-price"><span class="sub-yen">¥</span>383<span class="priceSuff"></span></span>                            
                                             </span>
@@ -56,46 +57,28 @@
                             <dl class="i-size">
                                 <dt class="size-name">尺码</dt>
                                 <dd class="size-list">
-                                    <ul>
-                                        <li class="size-list-item">
-                                            <span class="size-list-item-name">M</span>
-                                        </li>
-                                        <li class="size-list-item">
-                                            <span class="size-list-item-name">M</span>
-                                        </li>
-                                        <li class="size-list-item">
-                                            <span class="size-list-item-name">M</span>
-                                        </li>
-                                        <li class="size-list-item">
-                                            <span class="size-list-item-name">M</span>
-                                        </li>
-                                        <li class="size-list-item">
-                                            <span class="size-list-item-name">M</span>
-                                        </li>
-                                    </ul>
+                                    <el-radio-group v-model="radio" size="mini">
+                                        <el-radio label="1" border>S</el-radio>
+                                        <el-radio label="2" border>M</el-radio>
+                                        <el-radio label="3" border>L</el-radio>
+                                        <el-radio label="4" border>XL</el-radio>
+                                        <el-radio label="5" border>XXL</el-radio>
+                                    </el-radio-group>
                                 </dd>
                             </dl>
                         </div>
                         <!-- 购买数量 -->
                         <dl class="i-num clearfix">
                             <dt class="num-name">数量</dt>
-                            <dd class="ui-quantity num-box">
-                                <a href="javascript:;" role="button" class="vipFont num-reduce z-disable J-num-act-reduce">-</a>
-                                <em class="amount num-input J-pro-num-txt">1</em>
-                                <input type="hidden" value="1" name="num" id="J-num-input">
-                                <a href="javascript:;" role="button" class="vipFont num-add J-num-act-add">+</a>    
-                            </dd>
+                            <el-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
                         </dl>
                         <div class="tb-action">
                             <div class="tb-btn-buy">
-                                <a href="javascript:;" title="点击此按钮，到下一步确认购买信息" class="J_LinkBuy" >立即购买</a>
+                            <button title="点击此按钮，到下一步确认购买信息" class="J_LinkBuy">立即购买</button>
                             </div>
                             <div class="tb-btn-add">
-                            <a href="javascript:;" title="加入购物车" class="J_LinkAdd" shortcut-key="a" shortcut-label="加入购物车" shortcut-effect="click" data-spm-click="gostr=/tbdetail;locaid=d2">
-                                <i class="tb-iconfont">ŭ</i>加入购物车
-                            </a>
-                        
-                    </div>
+                                <button title="加入购物车" class="J_LinkAdd">加入购物车</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -112,11 +95,17 @@ export default {
     name: "partculars",
     data() {
         return {
-
+            num: 1,
+            radio: 0
         }
     },
     components:{
         Header,Base,Search
+    },
+    methods: {
+        handleChange(value) {
+            console.log(value);
+        }
     }
 }
 </script>
@@ -246,6 +235,7 @@ export default {
     -webkit-box-align: baseline;
     align-items: baseline;
     font-weight: 700;
+    line-height: 55px;
 }
 .sp-postfix {
     font-size: 20px;
@@ -256,22 +246,22 @@ export default {
     position: absolute;
     display: inline-block;
     height: 50px;
+    top: 44%;
 }
 .fullReductionV6 {
     position: relative;
     padding-right: 0;
 }
-
 .fullReductionV6 img {
     padding-right: 0;
-    padding-top: 6px;
+    padding-top: 0px;
+    vertical-align: top;
 }
 .price-v6-special {
     position: relative;
     display: inline-block;
     height: 30px;
     background: #fff;
-    margin-top: 6px;
     padding-right: 5px;
     background-image: url(//shop.vipstatic.com/img/detail/price/pc_pricelabel_middle-hash-122d2d65.png);
     background-position: left top;
@@ -313,12 +303,13 @@ export default {
 }
 /*尺码*/
 .i-size {
-    padding: 12px 11px 0;
+    padding: 30px 11px 0;
     position: relative;
     z-index: 11;
     margin-left: -11px;
     zoom: 1;
     min-height: 40px;
+    margin-bottom: 10px;
 }
 .size-list{
     position: relative;
@@ -326,30 +317,18 @@ export default {
     zoom: 1;
     width: 375px;
 }
-.size-list-item {
-    float: left;
-    position: relative;
-    min-width: 30px;
-    max-width: 358px;
-    height: 26px;
-    font-size: 12px;
-    padding: 1px 20px;
-    margin: 0 10px 10px 0;
-    border: 1px solid #ccc;
-    text-align: center;
-    line-height: 26px;
-    cursor: pointer;
-    background-color: #fff;
+.size-list>>>.el-radio{
+    margin-right: 0;
 }
-.size-list-item-name {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 358px;
-    display: inline-block;
+.size-list>>>.el-radio.is-bordered.is-checked{
+    border-color: #ff4400;
 }
-.size-list-item:hover {
-    border-color: #f43499;
+.size-list>>>.el-radio__input.is-checked .el-radio__inner{
+    border-color: #ff4400;
+    background: #ff4400;
+}
+.size-list>>>.el-radio__input.is-checked+.el-radio__label {
+    color: #ff4400;
 }
 /*购买数量*/
 .i-num {
@@ -359,51 +338,13 @@ export default {
     margin: -1px 0 0 -10px;
     padding-bottom: 10px;
 }
-.num-box {
-    position: relative;
-    height: 28px;
-    border: 1px solid #b3b3b3;
-}
-.ui-quantity {
-    display: inline-block;
-    width: 73px;
-    background-color: #fff;;
-    color: #333;
-    vertical-align: top;
-    text-align: center;
-    transition: .3s ease-out;
-}
-.num-box .num-add,.num-box .num-input,.num-box .num-reduce {
-    float: left;
-    height: 28px;
-    line-height: 28px;
-}
-.ui-quantity .z-disable {
-    background-color: #f9f8f8;
-    color: #dad8d8;
-}
-.ui-quantity .z-disable {
-    cursor: not-allowed;
-}
-.ui-quantity .vipFont {
-    font-size: 10px;
-}
-.ui-quantity .amount {
-    width: 29px;
-    font-size: 12px;
-    border-left: 1px solid #e4e3e3;
-    border-right: 1px solid #e4e3e3;
-    overflow: hidden;
-}
-.ui-quantity a {
-    width: 21px;
-    color: #7d7c7c;
-    background-color: #f9f8f8;
-    transition: .3s ease-out;
+
+.i-num>>>.el-input__inner{
+    width: 180px;
 }
 /*购买*/
 .tb-action {
-    margin-top: 50px;
+    margin-top: 35px;
 }
 .tb-action {
     z-index: 1;
@@ -416,18 +357,18 @@ export default {
 .tb-btn-buy,.tb-btn-add{
     float: left;
 }
-.tb-btn-buy a{
+.tb-btn-buy button{
     color: #E5511D;
     border-color: #F0CAB6;
     background: #FFE4D0;
 }
-.tb-btn-add a {
+.tb-btn-add button {
     width: 180px;
     color: #FFF;
     border-color: #F40;
     background: #F40;
 }
-.tb-btn-buy a,.tb-btn-add a {
+.tb-btn-buy button, .tb-btn-add button {
     display: block;
     cursor: pointer;
     width: 134px;

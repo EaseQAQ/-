@@ -27,20 +27,22 @@
             </div>
             <!--表格-->
             <div class="tab">
-                <el-table :data="tableData" border style="width: 100%">
+                <el-table :data="userlist" border style="width: 100%">
                     <el-table-column type="selection" width="55">
                     </el-table-column>
-                    <el-table-column fixed prop="id" label="管理员ID" width="150">
+                    <el-table-column fixed prop="adm_id" label="管理员ID" width="150">
                     </el-table-column>
-                    <el-table-column prop="account" label="管理员账号" width="200">
+                    <el-table-column prop="adm_account" label="管理员账号" width="200">
                     </el-table-column>
-                    <el-table-column prop="jurisdiction" label="管理员权限" width="130">
+                    <el-table-column prop="adm_pwd" label="管理员密码" width="130">
                     </el-table-column>
-                    <el-table-column prop="classify" label="管理分类" width="150">
+                    <el-table-column prop="adm_super" label="管理员权限" width="130">
                     </el-table-column>
+                    <!-- <el-table-column prop="classify" label="管理分类" width="150">
+                    </el-table-column> -->
                     <el-table-column fixed="right" label="操作" width="130">
                     <template slot-scope="scope">
-                        <el-button @click="handleClick(scope.row)" type="text" size="small">删除</el-button>
+                        <el-button @click="removeUserById(scope.row.id)" type="text" size="small">删除</el-button>
                         <el-button type="text" size="small">修改权限</el-button>
                     </template>
                     </el-table-column>
@@ -51,8 +53,20 @@
 </template>
 
 <script>
+
     export default {
         name: "AdministratorList",
+        data() {
+            return {
+                userlist: [],
+                restaurants: [],
+                state1: '',
+                state2: ''
+            }
+        },
+        // created(){
+            
+        // },
         methods: {
             handleClick(row) {
                 console.log(row);
@@ -126,19 +140,11 @@
         },
         mounted() {
             this.restaurants = this.loadAll();
-        },
-        data() {
-            return {
-                tableData: [{
-                    id: '大大王',
-                    account: '173913937',
-                    jurisdiction: '超级管理员',
-                    classify: '无'
-                }],
-                    restaurants: [],
-                    state1: '',
-                    state2: ''
-            }
+            this.axios.get('http://localhost:8080/merchant/admin/superadmin').then((response) => {
+                this.userlist =response.data
+            }).catch(err=>{
+                console.log("获取数据失败" + err);
+            })
         }
     }
 </script>

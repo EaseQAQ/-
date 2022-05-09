@@ -27,29 +27,30 @@
             </div>
             <!--表格-->
             <div class="tab">
-                <el-table :data="tableData" border style="width: 100%">
+                <el-table :data="userlist" border style="width: 100%">
                     <el-table-column type="selection" width="55">
                     </el-table-column>
-                    <el-table-column fixed prop="id" label="用户ID" width="70">
+                    <el-table-column fixed prop="cust_id" label="用户ID" width="70">
                     </el-table-column>
-                    <el-table-column prop="name" label="用户账号" width="150">
+                    <el-table-column prop="cust_account" label="用户账号" width="150">
                     </el-table-column>
-                    <el-table-column prop="pwd" label="用户密码" width="150">
+                    <el-table-column prop="cust_pwd" label="用户密码" width="150">
                     </el-table-column>
-                    <el-table-column prop="phone" label="用户号码" width="140">
+                    <el-table-column prop="cust_phone" label="用户号码" width="140">
                     </el-table-column>
-                    <el-table-column prop="balance" label="用户余额" width="110">
+                    <el-table-column prop="cust_balance" label="用户余额" width="110">
                     </el-table-column>
-                    <el-table-column prop="integral" label="用户积分" width="110">
+                    <el-table-column prop="cust_integral" label="用户积分" width="110">
                     </el-table-column>
-                    <el-table-column prop="vip" label="vip" width="50">
+                    <el-table-column prop="cust_vip" label="vip" width="50">
                     </el-table-column>
                     <el-table-column fixed="right" label="操作" width="130">
                     <template slot-scope="scope">
-                        <el-button @click="handleClick(scope.row)" type="text" size="small">删除</el-button>
+                        <el-button @click="del(scope.row.cust_id)" type="text" size="small">删除</el-button>
                         <el-button type="text" size="small">修改</el-button>
-                    </template>
+                        </template>
                     </el-table-column>
+                    
                 </el-table>
             </div>
         </div>
@@ -59,10 +60,16 @@
 <script>
     export default {
         name: "UsersList",
+        data() {
+            return {
+                userlist: [],
+                restaurants: [],
+                state1: '',
+                state2: '',
+                cust_id:''
+            }
+        },
         methods: {
-            handleClick(row) {
-                console.log(row);
-            },
             querySearch(queryString, cb) {
                 var restaurants = this.restaurants;
                 var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
@@ -128,27 +135,28 @@
             },
             handleSelect(item) {
                 console.log(item);
+            },
+            del(row){
+                let id = row
+                console.log(id)
+                this.axios.get(`http://localhost:8080/merchant/admin/delcustomer?id=${id}`).
+                then(res=>{
+                    console.log("成功");
+                })
+                .catch(err=>{
+                    console.log("操作失败" + err);
+                })
             }
         },
         mounted() {
             this.restaurants = this.loadAll();
+            this.axios.get('http://localhost:8080/merchant/admin/customer').then((response) => {
+                this.cust_id=response.data[0].cust_id
+                this.userlist =response.data
+            }).catch(err=>{
+                console.log("获取数据失败" + err);
+            })
         },
-        data() {
-            return {
-                tableData: [{
-                    id: '1',
-                    name: '1231313',
-                    pwd: '123123',
-                    phone: '14789509113',
-                    balance:'100',
-                    integral:'1000',
-                    vip:'0'
-                }],
-                    restaurants: [],
-                    state1: '',
-                    state2: ''
-            }
-        }
     }
 </script>
 
