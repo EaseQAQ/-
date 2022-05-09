@@ -9,8 +9,8 @@
             <div class="focus-banner">
                 <div class="focus-banner-con-wrq">
                     <el-carousel height="340px">
-                        <el-carousel-item v-for="item in 4" :key="item">
-                            <h3 class="small">{{ item }}</h3>
+                        <el-carousel-item v-for="item in this.lunimg" :key="item">
+                            <img :src='item'>
                         </el-carousel-item>
                     </el-carousel>
                 </div>
@@ -23,116 +23,28 @@
                             <span class="total-title fl">猜你喜欢</span>
                         </h3>
                         <div class="list clearfix">
-                            <div class="item " role="listitem" aria-posinset="0" aria-setsize="75">
+                        <!-- 商品的盒子 
+                        
+                        cateDetail_id: 60020
+                        goods_discount: null
+                        goods_id: 70336
+                        goods_img: "https://s2.loli.net/2022/04/26/LtdnwUafFSc8mV1.jpg"
+                        goods_name: "【经典款】四季新款牛仔衬衫男休闲衬衣男舒适百搭长袖衬衫男"
+                        goods_price: 148
+                        sel_id: 20011
+                        -->
+                            <div class="item " role="listitem" aria-posinset="0" aria-setsize="75" v-for="(item,index) in this.shopp" :key="index">
                                 <a href="" class="hotsale-item">
                                     <div class="img-wrapper">
-                                        <img src="https://img.alicdn.com/bao/uploaded/i4/876399841/O1CN01aoWq3I2MZEQE0vzaV_!!876399841.jpg_400x400q90.jpg_.webp">
+                                        <img :src="item[0].goods_img">
                                     </div>
-                                    <h4>美国派力肯pelican安全箱轮长条箱1700 1720 1740 1750 1770防水</h4>
+                                    <h4>{{item[0].goods_name}}</h4>
                                 </a>
                                 <p class="info">
-                                    <span class="price"><em>¥</em>1620</span>
+                                    <span class="price"><em>¥</em>{{item[0].goods_price}}</span>
                                 </p>
                             </div>
-                            <div class="item " role="listitem" aria-posinset="1" aria-setsize="75">
-                                <a href="" class="hotsale-item">
-                                    <div class="img-wrapper">
-                                        <img src="https://img.alicdn.com/bao/uploaded/i4/876399841/O1CN01aoWq3I2MZEQE0vzaV_!!876399841.jpg_400x400q90.jpg_.webp">
-                                    </div>
-                                    <h4>美国派力肯pelican安全箱轮长条箱1700 1720 1740 1750 1770防水</h4>
-                                </a>
-                                <p class="info">
-                                    <span class="price"><em>¥</em>1620</span>
-                                </p>
-                            </div>
-                            <div class="item " role="listitem" aria-posinset="2" aria-setsize="75">
-                                <a href="" class="hotsale-item">
-                                    <div class="img-wrapper">
-                                        <img src="https://img.alicdn.com/bao/uploaded/i4/876399841/O1CN01aoWq3I2MZEQE0vzaV_!!876399841.jpg_400x400q90.jpg_.webp">
-                                    </div>
-                                    <h4>美国派力肯pelican安全箱轮长条箱1700 1720 1740 1750 1770防水</h4>
-                                </a>
-                                <p class="info">
-                                    <span class="price"><em>¥</em>1620</span>
-                                </p>
-                            </div>
-                            <div class="item " role="listitem" aria-posinset="3" aria-setsize="75">
-                                <a href="" class="hotsale-item">
-                                    <div class="img-wrapper">
-                                        <img src="https://img.alicdn.com/bao/uploaded/i4/876399841/O1CN01aoWq3I2MZEQE0vzaV_!!876399841.jpg_400x400q90.jpg_.webp">
-                                    </div>
-                                    <h4>美国派力肯pelican安全箱轮长条箱1700 1720 1740 1750 1770防水</h4>
-                                </a>
-                                <p class="info">
-                                    <span class="price"><em>¥</em>1620</span>
-                                </p>
-                            </div>
-                            <div class="item " role="listitem" aria-posinset="4" aria-setsize="75">
-                                <a href="" class="hotsale-item">
-                                    <div class="img-wrapper">
-                                        <img src="https://img.alicdn.com/bao/uploaded/i4/876399841/O1CN01aoWq3I2MZEQE0vzaV_!!876399841.jpg_400x400q90.jpg_.webp">
-                                    </div>
-                                    <h4>美国派力肯pelican安全箱轮长条箱1700 1720 1740 1750 1770防水</h4>
-                                </a>
-                                <p class="info">
-                                    <span class="price"><em>¥</em>1620</span>
-                                </p>
-                            </div>
-                            <div class="item " role="listitem" aria-posinset="5" aria-setsize="75">
-                                <a href="" class="hotsale-item">
-                                    <div class="img-wrapper">
-                                        <img src="https://img.alicdn.com/bao/uploaded/i4/876399841/O1CN01aoWq3I2MZEQE0vzaV_!!876399841.jpg_400x400q90.jpg_.webp">
-                                    </div>
-                                    <h4>美国派力肯pelican安全箱轮长条箱1700 1720 1740 1750 1770防水</h4>
-                                </a>
-                                <p class="info">
-                                    <span class="price"><em>¥</em>1620</span>
-                                </p>
-                            </div>
-                            <div class="item " role="listitem" aria-posinset="6" aria-setsize="75">
-                                <a href="" class="hotsale-item">
-                                    <div class="img-wrapper">
-                                        <img src="https://img.alicdn.com/bao/uploaded/i4/876399841/O1CN01aoWq3I2MZEQE0vzaV_!!876399841.jpg_400x400q90.jpg_.webp">
-                                    </div>
-                                    <h4>美国派力肯pelican安全箱轮长条箱1700 1720 1740 1750 1770防水</h4>
-                                </a>
-                                <p class="info">
-                                    <span class="price"><em>¥</em>1620</span>
-                                </p>
-                            </div>
-                            <div class="item " role="listitem" aria-posinset="7" aria-setsize="75">
-                                <a href="" class="hotsale-item">
-                                    <div class="img-wrapper">
-                                        <img src="https://img.alicdn.com/bao/uploaded/i4/876399841/O1CN01aoWq3I2MZEQE0vzaV_!!876399841.jpg_400x400q90.jpg_.webp">
-                                    </div>
-                                    <h4>美国派力肯pelican安全箱轮长条箱1700 1720 1740 1750 1770防水</h4>
-                                </a>
-                                <p class="info">
-                                    <span class="price"><em>¥</em>1620</span>
-                                </p>
-                            </div>
-                            <div class="item " role="listitem" aria-posinset="8" aria-setsize="75">
-                                <a href="" class="hotsale-item">
-                                    <div class="img-wrapper">
-                                        <img src="https://img.alicdn.com/bao/uploaded/i4/876399841/O1CN01aoWq3I2MZEQE0vzaV_!!876399841.jpg_400x400q90.jpg_.webp">
-                                    </div>
-                                    <h4>美国派力肯pelican安全箱轮长条箱1700 1720 1740 1750 1770防水</h4>
-                                </a>
-                                <p class="info">
-                                    <span class="price"><em>¥</em>1620</span>
-                                </p>
-                            </div>
-                            <div class="item " role="listitem" aria-posinset="9" aria-setsize="75">
-                                <a href="" class="hotsale-item">
-                                    <div class="img-wrapper">
-                                        <img src="https://img.alicdn.com/bao/uploaded/i4/876399841/O1CN01aoWq3I2MZEQE0vzaV_!!876399841.jpg_400x400q90.jpg_.webp">
-                                    </div>
-                                    <h4>美国派力肯pelican安全箱轮长条箱1700 1720 1740 1750 1770防水</h4>
-                                </a>
-                                <p class="info">
-                                    <span class="price"><em>¥</em>1620</span>
-                                </p>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -150,12 +62,32 @@ export default {
     name: "homepage",
     data() {
         return {
-            
+            //轮播图
+            lunimg:[
+                'https://s2.loli.net/2022/05/05/WNlhAcB39wUISQ1.jpg',
+                'https://s2.loli.net/2022/05/05/IKgarb6T4znGq89.jpg',
+                'https://s2.loli.net/2022/05/05/rc64XFAjQogE5PV.jpg'
+                ],
+            //首页循环的商品
+            shopp:'',
         }
     },
     components:{
         Header,Base,Search
-    }
+    },
+    mounted() {
+        this.axios
+                .get('http://localhost:8080/merchant/page')
+                .then((response)=>{ //response : 请求的数据
+                    this.shopp=response.data;
+                    console.log(this.shopp);
+                },(error)=>{
+                    console.log(error);
+                })
+    },
+    methods: {
+        
+    },
 }
 </script>
 

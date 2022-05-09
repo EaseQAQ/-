@@ -2,7 +2,7 @@
     <div>
         <!-- logo、搜索 -->
         <div class="head-logo">
-            <div class="head-inner">
+
                 <!-- logo -->
                 <div class="c-logo">
                     <div class="header-logo-dop">
@@ -14,11 +14,18 @@
                 <!-- 搜索 -->
                 <div class="c-search">
                     <div class="c-search-form">
-                    <el-input placeholder="请输入内容" clearable></el-input>
-                    <el-button type="primary" icon="el-icon-search">搜索</el-button>
+                        <el-input placeholder="请输入内容" clearable v-model="input" @input="sear"></el-input>
+                        <el-button type="primary" icon="el-icon-search" @click="sear2">搜索</el-button>
                     </div>
                 </div>
-            </div>
+                <div class="c-search_below">
+                    <ul class="list-group">
+                        <li class="list-group-item" v-for="(item,index) in this.inputdata" :key="index" @click="sears(item.goods_name)">
+                            <router-link to="/classification">{{item.goods_name}}</router-link>
+                        </li>
+                    </ul>
+                </div>
+
         </div>
         <!-- 商品导航 -->
         <nav class="main-nav">
@@ -30,63 +37,143 @@
                     <!-- 分类 -->
                     <div class="nav-category-data">
                         <ul class="cate-menu">
-                            <li class="cate-menu-item"><span class="menu-item-tit">女装/男装/内衣</span></li>
-                            <li class="cate-menu-item"><span class="menu-item-tit">女鞋/男鞋/箱包</span></li>
-                            <li class="cate-menu-item"><span class="menu-item-tit">护肤彩妆/个护</span></li>
-                            <li class="cate-menu-item"><span class="menu-item-tit">运动户外</span></li>
-                            <li class="cate-menu-item"><span class="menu-item-tit">家电数码</span></li>
-                            <li class="cate-menu-item"><span class="menu-item-tit">母婴童装</span></li>
-                            <li class="cate-menu-item"><span class="menu-item-tit">手表配饰</span></li>
-                            <li class="cate-menu-item"><span class="menu-item-tit">居家用品</span></li>
-                            <li class="cate-menu-item"><span class="menu-item-tit">唯品生活</span></li>
-                            <li class="cate-menu-item"><span class="menu-item-tit">医药健康</span></li>
+                            <li class="cate-menu-item" @mouseenter="getclassification(item.NAME)" v-for="(item,index) in this.leftmac" :key='index'>
+                            <span class="menu-item-tit">{{item.NAME}}</span>
+                            </li>
                         </ul>
-                        <div class="cate-pop">
+                        <div class="cate-pop" @mouseleave='leavebox'>
                             <div class="cate-part">
                                 <div class="cate-part-col1">
                                     <div class="cate-detail">
                                         <dl class="cate-detail-item">
+                                            <!-- 热销分类 -->
                                             <dt class="cate-detail-tit">
                                                 <i class="vipFont">></i>
-                                                <span>女士热销分类</span>
+                                                <span>热销分类</span>
                                             </dt>
-                                            <dd class="cate-detail-con">
-                                                <a target="_blank" class="J_category3" href="//list.vip.com/autolist.html?rule_id=53986299&amp;title=%E8%A1%AC%E8%A1%AB&amp;refer_url=https%3A%2F%2Fcategory.vip.com%2Fhome">衬衫</a>
+                                            <!-- 小分类 -->
+                                            <dd class="cate-detail-con" v-for="(item,index) in this.smalldetails" :key="index" @click="getgoods(item.cateDetail_name)">
+                                                <router-link to="/classification" class="J_category3" href=" ">{{item.cateDetail_name}}</router-link>
                                             </dd>
                                         </dl>
                                     </div>
                                 </div>
-                            </div>
+                             </div>
                         </div>
                     </div>
                     <!-- 分类 end -->
                     </li>
-                    <li><a href="#" class="main-nav-atag">美妆</a></li>
-                    <li><a href="" class="main-nav-atag">女装</a></li>
-                    <li><a href="" class="main-nav-atag">运动</a></li>
-                    <li><a href="" class="main-nav-atag">鞋包</a></li>
-                    <li><a href="" class="main-nav-atag">母婴</a></li>
-                    <li><a href="" class="main-nav-atag">男装</a></li>
-                    <li><a href="" class="main-nav-atag">电器</a></li>
-                    <li><a href="" class="main-nav-atag">食品</a></li>
-                    <li><a href="" class="main-nav-atag">首饰</a></li>
-                    <li><a href="" class="main-nav-atag">数码</a></li>
+                    <li v-for="(item,index) in this.rightmac" :key="index" @click="getDetailsgoods(item.category_name)">
+                        <router-link to="/classification" class="main-nav-atag">{{item.category_name}}</router-link>
+                    </li>
                 </ul>
             </div>
         </nav>
     </div>
+    
 </template>
 <script>
 export default {
-    name:'search'
+    name:'search',
+    data(){
+        return {
+            leftmac:'',
+            rightmac:'',
+            detailgoods:'',
+            // 左侧小分类
+            smalldetails:'',
+            // 搜索框输入的内容
+            input:'',
+            //搜索框搜索出来的内容
+            inputdata:''
+        }
+    },
+    mounted(){
+        //左侧分类栏
+        this.axios
+                .get('http://localhost:8080/merchant/classificationDetails/leftmac')
+                .then((response)=>{
+                    this.leftmac=response.data;
+                //    console.log(this.leftmac);
+                },(error)=>{
+                    console.log(error)
+                })
+        //分类栏左边的数据
+        this.axios
+                .get('http://localhost:8080/merchant/classificationDetails/rightmac')
+                .then((response)=>{
+                    this.rightmac=response.data;
+                //    console.log(this.rightmac);
+                },(error)=>{
+                    console.log(error)
+                })
+
+    },
+    methods:{
+        //获取数据传回分类页面
+        getDetailsgoods(name){
+            this.$emit('getdetails',name);
+        },
+        //点击大分类显示小分类
+        getclassification(name){
+            document.querySelector('.cate-pop').style.display='block'
+            // console.log(name);
+            this.axios
+                .get(`http://localhost:8080/merchant/classificationDetails/smallmac?name=${name}`)
+                .then((response)=>{
+                    this.smalldetails=response.data;
+                    // console.log(this.smalldetails);
+                },(error)=>{
+                    console.log(error)
+                })
+        },
+        //鼠标移开盒子隐藏
+        leavebox(){
+            document.querySelector('.cate-pop').style.display='none'
+        },
+        // 上面分类
+        getgoods(name){
+            // console.log(name);
+            this.$emit('abc',name);
+        },
+        // 搜索框
+        sear(){
+            console.log(this.input);
+            if(!this.input==''){
+                document.querySelector('.c-search_below').style.display='block';
+                this.axios
+                .get(`http://localhost:8080/merchant/classificationDetails/search?name=${this.input}`)
+                .then((response)=>{
+                    this.inputdata='';
+                    this.inputdata=response.data;
+                    // console.log(this.inputdata);
+                },(error)=>{
+                    console.log(error)
+                })
+            }else{
+                document.querySelector('.c-search_below').style.display='none';
+            }
+        },
+        // 点击搜索出来的内容跳转进分类页
+        sears(name){
+            this.$emit('sear',name)
+            this.input='';
+            document.querySelector('.c-search_below').style.display='none';
+        },
+        // 点击后面的搜索按钮搜索
+        sear2(){
+            this.$emit('sear2',this.input);
+            this.input='';
+            document.querySelector('.c-search_below').style.display='none';
+        }
+        
+    }
 }
 </script>
 <style>
 .head-logo{
     height: 100px;
-}
-.head-inner{
-    width: 1000px;
+        width: 1000px;
     margin: 0 auto;
 }
 .c-logo{
@@ -110,6 +197,28 @@ export default {
     margin-top: 33px;
     margin-right: 200px;
     width: 550px;
+}
+.c-search_below{
+    display: none;
+    width: 538px;
+    background-color: white;
+    border: 1px solid #ff4400;
+    position: absolute;
+    top: 110px;
+    left: 510px;
+    z-index: 10;
+    border-radius: 7px;
+}
+.list-group{
+    margin-bottom: 0px;
+}
+.list-group-item{
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.list-group-item a{
+    color: #666;
 }
 #header img{
     text-decoration: none;
@@ -137,6 +246,7 @@ export default {
     margin: 0 auto;
     position: relative;
     clear: both;
+    z-index: 5;
 }
 #J_main_nav_category{
     background-color: #ff4400;
@@ -147,7 +257,7 @@ export default {
 .main-nav-link li {
     float: left;
     position: relative;
-    z-index: 8;
+    z-index: 1;
     height: 43px;
 }
 .main-nav-link li .main-nav-atag:hover{
@@ -163,7 +273,7 @@ export default {
 }
 .nav-category-data {
     position: absolute;
-    z-index: 99;
+    z-index: 2;
     color: #fff;
 }
 .cate-menu{
@@ -181,11 +291,11 @@ export default {
 .nav-category-data .cate-menu .cate-menu-item {
     display: block;
     text-align: left;
-    padding-left: 35px;
     overflow: hidden;
     height: 45px;
     line-height: 45px;
     float: none;
+    text-align: center;
 }
 .nav-category-data .cate-menu .cate-menu-item:hover{
     background-color: white;
@@ -193,7 +303,7 @@ export default {
     cursor: pointer;
 }
 .nav-category-data .cate-menu .cate-menu-item .menu-item-tit {
-    font-size: 12px;
+    font-size: 13px;
 }
 .after-color a{
     color:#606266
@@ -203,68 +313,73 @@ export default {
 }
 /*具体分类*/
 .nav-category-data .cate-pop {
-    display: none;
-    background-color: #fff;
-    position: absolute;
-    left: 156px;
-    top: 0;
-    width: 844px;
-    height: 495px;
-    box-shadow: 2px 2px 3px 0 rgb(0 0 0 / 10%);
+  display: none; 
+  background-color: #fff;
+  position:absolute;
+  left:156px;
+  top:0;
+  width:844px;
+  height: 270px;
+  box-shadow: 2px 2px 3px 0 rgb(0 0 0 / 10%);
 }
 .cate-part {
-    display: block;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
 }
 .cate-part-col1 {
-    float: left;
-    width: 519px;
-    padding: 16px 40px 16px 40px;
-    max-height: 462px;
-    border-top: 1px solid #eee;
+  float: left;
+  width: 600px;
+  padding: 16px 40px 16px 40px;
+  max-height: 462px;
+ border-top: 1px solid #eee;
 }
 .cate-detail-item {
-    margin-bottom: 24px;
-    position: relative;
-    font-size: 12px;
+     margin-bottom: 24px;
+ position: relative;
+ font-size: 12px;
 }
 .cate-detail-tit {
-    line-height: 22px;
-    position: absolute;
-    left: 0;
-    width: 83px;
-    color: #222;
-    overflow: hidden;
+line-height: 22px;
+ position: absolute;
+ left: 0;
+ width: 83px;
+ color: #222;
+ overflow: hidden;
+ margin-top: 10px;
 }
 .vipFont{
-    width: 10px;
-    vertical-align: middle;
-    float: right;
+ width: 10px;
+ vertical-align: middle;
+ float: right;
 }
 .cate-detail-tit span {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    display: inline-block;
-    width: 72px;
-    font-weight: 700;
+ overflow: hidden;
+ text-overflow: ellipsis;
+ white-space: nowrap;
+ display: inline-block;
+ width: 62px;
+ font-weight: 700;
+}
+.cate-detail .cate-detail-con:nth-of-type(1) {
+     margin-left: 100px;
 }
 .cate-detail .cate-detail-con {
-    line-height: 22px;
-    width: 425px;
-    margin-left: 95px;
-    overflow: hidden;
-    word-break: keep-all;
+ line-height: 22px;
+ margin-left: 20px;
+ overflow: hidden;
+ word-break: keep-all;
+float: left;
+margin-top: 10px;
 }
 .cate-detail-con a {
-    color: #666;
-    margin-right: 10px;
+ color: #666;
+ margin-right: 3px;
 }
 .cate-detail-con a:hover {
-    color: #ff4400;
+ color: #ff4400;
 }
 </style>

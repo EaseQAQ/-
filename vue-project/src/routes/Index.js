@@ -118,7 +118,6 @@ const routes = [
         /*商品信息页面*/
         children: [{
                 path: 'commodity',
-                name: 'commodity',
                 component: Commodity,
                 mate: {
                     title: "商品信息"
@@ -127,7 +126,6 @@ const routes = [
             /*买家评论*/
             {
                 path: 'comment',
-                name: 'comment',
                 component: Comment,
                 mate: {
                     title: "买家评论"
@@ -136,7 +134,6 @@ const routes = [
             /*上架商品*/
             {
                 path: 'goodsshelves',
-                name: 'goodsshelves',
                 component: GoodsShelves,
                 mate: {
                     title: '上架商品'
@@ -144,7 +141,6 @@ const routes = [
             },
             {
                 path: 'OrderM',
-                name: 'OrderM',
                 component: OrderM,
                 mate: {
                     title: '订单信息'
@@ -165,7 +161,6 @@ const routes = [
             /*个人信息*/
             {
                 path: 'Personal',
-                name: 'Personal',
                 component: Personal,
                 mate: {
                     title: "个人信息"
@@ -174,7 +169,6 @@ const routes = [
             /*个人资产*/
             {
                 path: 'Property',
-                name: 'Property',
                 component: Property,
                 mate: {
                     title: '个人资产'
@@ -183,7 +177,6 @@ const routes = [
             // 收货地址
             {
                 path: 'ShippingAddress',
-                name: 'ShippingAddress',
                 component: ShippingAddress,
                 mate: {
                     title: '收货地址'
@@ -204,7 +197,6 @@ const routes = [
             /*订单信息*/
             {
                 path: 'OrderManagement',
-                name: 'OrderManagement',
                 component: OrderManagement,
                 mate: {
                     title: "订单信息"
@@ -213,7 +205,6 @@ const routes = [
             /*商家信息*/
             {
                 path: 'merchandise',
-                name: 'merchandise',
                 component: merchandise,
                 mate: {
                     title: '商品类型'
@@ -222,7 +213,6 @@ const routes = [
             // 上架申请
             {
                 path: 'ApplyFor',
-                name: 'ApplyFor',
                 component: ApplyFor,
                 mate: {
                     title: '上架申请'
@@ -243,7 +233,6 @@ const routes = [
             /*管理员列表*/
             {
                 path: 'AdministratorList',
-                name: 'AdministratorList',
                 component: AdministratorList,
                 mate: {
                     title: "管理员列表"
@@ -252,7 +241,6 @@ const routes = [
             /*商家列表*/
             {
                 path: 'MerchantList',
-                name: 'MerchantList',
                 component: MerchantList,
                 mate: {
                     title: '商家列表'
@@ -261,7 +249,6 @@ const routes = [
             // 用户列表
             {
                 path: 'UsersList',
-                name: 'UsersList',
                 component: UsersList,
                 mate: {
                     title: '用户列表'

@@ -1,6 +1,6 @@
 <template>
     <!-- 商品详情 -->
-    <div id="partculars">
+    <div id="particulars">
         <Header></Header>
         <Search></Search>
         <!-- 主体 -->
@@ -13,7 +13,7 @@
                         <div class="show- midpic">
                                 <a href="" class="J-mer-bigImgZoom" rel="undefined" title="undefined" style="outline-style: none; text-decoration: none;">
                                 <div class="zoomPad">
-                                    <img class="slide-mid-pic" src="//h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/106756/2021/0108/150/4e776d25-1079-4457-b76e-9828fc5907aa_840x840_90.jpg" width="420" height="420" data-original="//h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/106756/2021/0108/150/4e776d25-1079-4457-b76e-9828fc5907aa_840x840_90.jpg" alt="">
+                                    <img class="slide-mid-pic" :src="this.goodsimg" width="420" height="420" data-original="//h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/106756/2021/0108/150/4e776d25-1079-4457-b76e-9828fc5907aa_840x840_90.jpg" alt="">
                                 </div>
                             </a>
                         </div>
@@ -23,8 +23,8 @@
             <!-- 商品信息 -->
             <div class="M-productInfo">
                 <div class="pib-title">
-                    <a href="" class="pib-title-class J_brandName" target="_blank" mars_sead="hair_brand_click">qqqqq</a>
-                    <p class="pib-title-detail" title="秋季男士时尚大衣简约百搭条纹设计休闲外套男">秋季男士时尚大衣简约百搭条纹设计休闲外套男</p>
+                    <p class="pib-title-class J_brandName" mars_sead="hair_brand_click">{{this.sellname}}</p>
+                    <p class="pib-title-detail" title="秋季男士时尚大衣简约百搭条纹设计休闲外套男">{{this.goodsname}}</p>
                 </div>
                 <div>
                     <img src="//b.appsimg.com/upload/momin/2020/08/19/22/1597801542667.png" class="price_bgimg">
@@ -33,17 +33,17 @@
                         <div class="sp-info">
                             <div class="price-v6-line-one">
                                 <i class="pbox-yen">¥</i>
-                                <span title="413" class="sp-price">84</span>
+                                <span title="413" class="sp-price">{{this.goodsprice}}</span>
                                 <span class="sp-postfix">
                                     <span class="priceV6-content">
                                         <span class="fullReductionV6">
                                             <span class="lable_img">
-                                                    <img src="//shop.vipstatic.com/img/detail/price/pc_pricelabel_left-hash-b2b6492f.png">
-                                                </span>
+                                                <img src="//shop.vipstatic.com/img/detail/price/pc_pricelabel_left-hash-b2b6492f.png">
+                                            </span>
                                             <span class="price-v6-special">
-                                                
+                                            
                                                 <span class="special-title">会员价</span>
-                                                <span class="special-price"><span class="sub-yen">¥</span>383<span class="priceSuff"></span></span>                            
+                                                <span class="special-price"><span class="sub-yen">¥</span>{{parseFloat(this.goodsprice*0.8).toFixed(2)}}<span class="priceSuff"></span></span>                            
                                             </span>
                                         </span>
                                     </span>
@@ -58,11 +58,7 @@
                                 <dt class="size-name">尺码</dt>
                                 <dd class="size-list">
                                     <el-radio-group v-model="radio" size="mini">
-                                        <el-radio label="1" border>S</el-radio>
-                                        <el-radio label="2" border>M</el-radio>
-                                        <el-radio label="3" border>L</el-radio>
-                                        <el-radio label="4" border>XL</el-radio>
-                                        <el-radio label="5" border>XXL</el-radio>
+                                        <el-radio border v-for="(item,index) in this.goodssize" :key="index" label="index">{{item.goods_size}}</el-radio>
                                     </el-radio-group>
                                 </dd>
                             </dl>
@@ -74,10 +70,10 @@
                         </dl>
                         <div class="tb-action">
                             <div class="tb-btn-buy">
-                            <button title="点击此按钮，到下一步确认购买信息" class="J_LinkBuy">立即购买</button>
+                                <button title="点击此按钮，到下一步确认购买信息" class="J_LinkBuy" @click="buynow">立即购买</button>
                             </div>
                             <div class="tb-btn-add">
-                                <button title="加入购物车" class="J_LinkAdd">加入购物车</button>
+                                <button title="加入购物车" class="J_LinkAdd" @click="addTrolley">加入购物车</button>
                             </div>
                         </div>
                     </div>
@@ -92,19 +88,63 @@ import Header from './shared/header.vue'
 import Base from './shared/base.vue'
 import Search from './shared/search.vue'
 export default {
-    name: "partculars",
+    name: "particulars",
     data() {
         return {
-            num: 1,
-            radio: 0
+            radio: 0,
+            num:1,
+            // 商品名字
+            goodsname:'',
+            // 商品价格
+            goodsprice:0,
+            // 商品图片
+            goodsimg:'',
+            // 商品尺码
+            goodssize:'',
+            // 商品的店铺名
+            sellname:''
         }
     },
+    props:['id'],
     components:{
         Header,Base,Search
     },
-    methods: {
-        handleChange(value) {
-            console.log(value);
+    mounted(){
+        // 商品的详情
+        this.axios
+            .get(`http://localhost:8080/merchant/partic?id=${this.id}`)
+            .then((response)=>{
+                this.goodsname=response.data[0].goods_name;
+                this.goodsprice=response.data[0].goods_price;
+                this.goodsimg=response.data[0].goods_img;
+                this.sellname=response.data[0].sel_store
+                // console.log(this.goodsname,this.goodsprice,this.goodsimg);
+            },(error)=>{
+                console.log(error)
+            })
+        // 商品的尺寸
+        this.axios
+            .get(`http://localhost:8080/merchant/partic/goodssize?id=${this.id}`)
+            .then((response)=>{
+                this.goodssize=response.data;
+                console.log(this.goodssize);
+            },(error)=>{
+                // console.log(456);
+                console.log(error)
+            })
+    },
+    methods:{
+        buynow(){
+            console.log('正在前往结算');
+        },
+        addTrolley(){
+            console.log('添加购物车成功');
+        },
+        addnum(){
+            console.log('数量加1');
+        },
+        handleChange(value) { 
+            console.log(value); 
         }
     }
 }
@@ -135,6 +175,7 @@ export default {
     width: 420px;
     height: 420px;
     position: relative;
+    z-index: 99;
     margin-bottom: 7px;
     background-color: #f7f7f7;
 }
@@ -147,6 +188,7 @@ export default {
 .zoomPad {
     float: left;
     position: relative;
+    z-index: 99;
     cursor: crosshair;
     text-align: center;
     width: 420px;
@@ -252,6 +294,7 @@ export default {
     position: relative;
     padding-right: 0;
 }
+
 .fullReductionV6 img {
     padding-right: 0;
     padding-top: 0px;
@@ -303,13 +346,13 @@ export default {
 }
 /*尺码*/
 .i-size {
-    padding: 30px 11px 0;
+    padding: 40px 10px 0;
     position: relative;
     z-index: 11;
     margin-left: -11px;
     zoom: 1;
     min-height: 40px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 .size-list{
     position: relative;
@@ -332,19 +375,18 @@ export default {
 }
 /*购买数量*/
 .i-num {
-    padding: 11px 10px;
+    padding: 20px 10px;
     position: relative;
     height: 30px;
     margin: -1px 0 0 -10px;
     padding-bottom: 10px;
 }
-
 .i-num>>>.el-input__inner{
     width: 180px;
 }
 /*购买*/
 .tb-action {
-    margin-top: 35px;
+    margin-top: 50px;
 }
 .tb-action {
     z-index: 1;
@@ -368,7 +410,8 @@ export default {
     border-color: #F40;
     background: #F40;
 }
-.tb-btn-buy button, .tb-btn-add button {
+.tb-btn-buy button,.tb-btn-add button {
+
     display: block;
     cursor: pointer;
     width: 134px;

@@ -39,37 +39,16 @@ app.use('/customer',cust)
 //配置卖家路由
 import {sel} from './moudules/seller/index.js'
 app.use('/seller',sel)
+//配置分类页面商品路由
+import { details } from './moudules/classificationDetails/index.js'
+app.use('/classificationDetails', details)
+ //配置分类页面商品路由
+import { ticulars } from './moudules/partic/index.js'
+app.use('/partic', ticulars)
+ //配置首页面路由
+import { page } from './moudules/page/index.js'
+app.use('/page', page)
+
 app.listen(8000)
-/*
-import express from 'express'
-import mysql from 'mysql'
 
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: 'project'
-});
 
-connection.connect((err) => {
-    if (!err) {
-        console.log('连接mysql成功')
-    }
-});
-
-const app = express()
-
-app.get('/getCategory', (req, res) => {
-    //解决跨域
-    res.set('Access-Control-Allow-Origin', '*')
-    connection.query('select * from test', (err, data, field) => {
-        if (!err) {
-            //返回查询数据
-            res.send(data)
-        }
-    })
-})
-
-app.listen(8000, () => {
-    console.log('服务器开启中')
-})*/

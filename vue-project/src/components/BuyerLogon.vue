@@ -38,6 +38,9 @@
                             <el-form-item label="密码" prop="zpass" class="yongone">
                                 <el-input class="yong" type="password" v-model="zruleForm.zpass" autocomplete="off"  placeholder="密码6-10位"></el-input>
                             </el-form-item>
+                            <el-form-item label="手机号" prop="zpho" class="yongone">
+                                <el-input class="yong" type="text" v-model="zruleForm.zpho" placeholder="请输入手机号码"></el-input>
+                            </el-form-item>
                             <el-form-item>
                                 <el-button type="primary" @click="zsubmitForm('zruleForm')" class="subclass">注 册</el-button>
                                 <a href="#" class="zhanhbox" @click="registerboxOn">已有账号？点击登录</a>
@@ -91,6 +94,16 @@
                     callback();
                 }
             };
+            let zphoyz=(rule, value, callback) => {
+                let reg =/^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/;
+                if (value === '') {
+                    callback(new Error('请输入手机号'));
+                } else if(value.length<11 || !reg.test(value)){
+                    return callback(new Error('手机号码不规范'));
+                }else {
+                    callback();
+                }
+            };
             return {
                 /*登陆表单*/
                 ruleForm: {
@@ -108,7 +121,8 @@
                 /*注册数据*/
                 zruleForm: {
                     zpass: '',
-                    zage: ''
+                    zage: '',
+                    zpho:''
                 },
                 zrules: {
                     zpass: [
@@ -116,9 +130,27 @@
                     ],
                     zage: [
                         { validator: zcheckAge, trigger: 'blur' }
+                    ],
+                    zpho:[
+                        { validator: zphoyz, trigger: 'blur' }
                     ]
                 },
             };
+        },
+        //添加路由守卫，判断是从哪一个页面过来的
+        beforeRouteEnter(to, from, next) {
+            next((vm) => {
+                console.log(to);
+                console.log(from);
+                //如果是本路由来的，就将路由赋值为首页路由
+                if(from.path=="/buyerlogon"){
+                    vm.fromPath = "/";
+                    return
+                }
+                // 通过 `vm` 访问组件实例,将值传入fromPath
+                vm.fromPath = from.path;
+                
+            });
         },
         methods: {
             /*点击更换登录注册页面方法*/
@@ -134,13 +166,31 @@
                 //隐藏注册页面
                 document.querySelector('#loginbox').style.display='block'
             },
+            // 登录方法，验证成功后
             submitForm(formName) {
                 document.querySelector('.subclass').style.backgroundColor='rgb(250,168,172)'
                 document.querySelector('.subclass').style.border='solid 1px rgb(250,168,172)'
                 this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        alert('submit!');
-                    } else {
+                    if (valid) {//验证成功
+                        this.axios.get(`http://localhost:8080/merchant/customer?name=${this.ruleForm.age}&pas=${this.ruleForm.pass}`)
+                        .then((response)=>{
+                            // 数组长度为1则登录成功 数组长度为0则登录失败
+                            if(response.data.length==0){//登录失败，提醒用户
+                                console.log("失败");
+                                this.$notify.error({
+                                    message: '用户名或者密码错误'
+                                });
+                            }else{//成功后存入session跳转前一个页面
+                                window.sessionStorage.setItem("customername",JSON.stringify(this.ruleForm.age))
+                                window.sessionStorage.setItem("customerid",JSON.stringify(response.data[0].cust_id))
+                                this.$router.push({
+                                    path: this.fromPath,
+                                });
+                            }
+                        },(error)=>{
+                            console.log(error);
+                        })
+                    } else {//验证失败
                         console.log('error submit!!');
                         return false;
                     }
@@ -152,9 +202,29 @@
                 document.querySelectorAll('.subclass')[1].style.border='solid 1px rgb(250,168,172)'
                 this.$refs[formName].validate((valid) => {
                     if (valid) {//规范成功
-                        alert('注册！');
-                        console.log(this.zruleForm.zage)
-                        console.log(this.zruleForm.zpass)
+                        let name=this.zruleForm.zage
+                        let pas=this.zruleForm.zpass
+                        let pho=this.zruleForm.zpho
+                        this.axios.get(`http://localhost:8080/merchant/customer/zu?zname=${name}&zpas=${pas}&zpho=${pho}`)
+                        .then((response)=>{
+                            if(response.data=='yes'){
+                                //显示登录页面
+                                document.querySelector('#registerbox').style.display='none'
+                                //隐藏注册页面
+                                document.querySelector('#loginbox').style.display='block'
+                                return;
+                            }
+                            //如果数据的长度是1就代表用户名存在0代表用户名不存在,yes就是存储成功
+                            if(response.data.length==0){//没有用户名
+                                
+                            }else{//有用户名进行提醒
+                                this.$notify.error({
+                                    message: '用户名已经存在，请重新输入'
+                                });
+                            }
+                        },(error)=>{
+                            console.log(error);
+                        })
                     } else {//规范失败
                         console.log('error submit!!');
                         return false;
@@ -230,11 +300,14 @@
         display: inline-block;
         margin-left: 20px;
     }/*登录盒子*/
-    #loginbox{
-
+    #loginbox >>>.el-input__inner{
+        width: 270px;
     }
     /*注册盒子*/
     #registerbox{
         display: none;
+    }
+    #registerbox >>>.el-input__inner{
+        width: 270px;
     }
 </style>

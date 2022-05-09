@@ -1,58 +1,67 @@
 <template>
     <!-- 筛选 -->
     <div class="list-define-w wrapper">
-        <div class="pro-list-oper">
-            <!-- 筛选左 -->
-            <div class="pro-oper">
-                <!--  -->
-                <div class="oper-hd-general J_oper_tag" title="综合">
-                    <p>综合</p>
-                </div>
-                <!--  -->
-                <div class="oper-hd-price J_oper_tag" title="销量">
-                    <p>销量</p>
-                </div>
-                <!--  -->
-                <div class="oper-hd-discot J_oper_tag" title="价格">
-                    <p>价格</p>
-                </div>
-                <!-- 价格填写 -->
-                <div class="oper-hd-select clearfix">
-                    <div class="oper-select-inner">
-                        <span class="oper-select-star">
-                            <input type="text" placeholder=" ¥" value="¥" class="J_priceMin">
-                            <em class="cat-select-tips J_placeholder"> ¥</em>
-                        </span>
-                        <i class="i-cat-pre"> - </i>
-                        <span class="oper-select-end">
-                            <input type="text" placeholder=" ¥" value="¥" class="J_priceMax">
-                            <em class="cat-select-tips J_placeholder"> ¥</em>
-                        </span>
-                        <i class="J_sortSubmit_btn i-cat-btn" mars_sead="prize_screen_add" title="确定">确定</i>
-                        <i class="J_priceClear i-cat-btn" mars_sead="prize_screen_cut" title="清除">清除</i>
+            <div class="pro-list-oper">
+                <!-- 筛选左 -->
+                <div class="pro-oper">
+                    <!--  -->
+                    <div class="oper-hd-discot J_oper_tag" title="价格">
+                        <p>价格</p>
+                    </div>
+                    <!-- 价格填写 -->
+                    <div class="oper-hd-select clearfix">
+                        <div class="oper-select-inner">
+                            <span class="oper-select-star">
+                                <input type="text" placeholder=" ¥" value="¥" class="J_priceMin" v-model="minimum">
+                                <em class="cat-select-tips J_placeholder"> ¥</em>
+                            </span>
+                            <i class="i-cat-pre"> - </i>
+                            <span class="oper-select-end">
+                                <input type="text" placeholder=" ¥" value="¥" class="J_priceMax" v-model="maximum">
+                                <em class="cat-select-tips J_placeholder"> ¥</em>
+                            </span>
+                            <i class="J_sortSubmit_btn i-cat-btn" mars_sead="prize_screen_add" title="确定" @click="queryPrice">确定</i>
+                            <i class="J_priceClear i-cat-btn" mars_sead="prize_screen_cut" title="清除" @click='deletePrice'>清除</i>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- 筛选右 -->
-            <div id="J_page_special" class="page pro-paging">
-                <span class="page-total">
-                    <em class="page-nub">......</em>件商品
-                </span>
-                <span><em class="page-nub">.</em>/..</span>
-                <el-button-group style="margin-left:15px">
-                    <el-button type="primary" icon="el-icon-arrow-left" size="mini"></el-button>
-                    <el-button type="primary" size="mini">下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button>
-                </el-button-group>
+                <!-- 筛选右 -->
+                <div id="J_page_special" class="page pro-paging">
+                    <span class="page-total">
+                        <em class="page-nub">{{this.goodslength}}</em>件商品
+                    </span>
+                    <span><em class="page-nub">1</em>/1</span>
+                    <el-button-group style="margin-left:15px">
+                        <el-button type="primary" icon="el-icon-arrow-left" size="mini"></el-button>
+                        <el-button type="primary" size="mini">下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button>
+                    </el-button-group>
+                </div>
             </div>
         </div>
-    </div>
 </template>
 <script>
 export default {
     name: "screen",
     data() {
         return {
-
+            //赛选价格的最大值
+            maximum:'',
+            minimum:''
+        }
+    },
+    props:['goodslength'],
+    methods:{
+        // 清除价格
+        deletePrice(){
+            document.querySelector('.J_priceMin').value='￥';
+            document.querySelector('.J_priceMax').value='￥';
+        },
+        // 根据价格推送商品
+        queryPrice(){
+            console.log('最小值：'+this.minimum+',最大值：'+this.maximum);
+            this.$emit('competition',this.minimum,this.maximum)
+            this.minimum='';
+            this.maximum='';
         }
     }
 }

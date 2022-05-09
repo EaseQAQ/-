@@ -42,7 +42,7 @@
                     <h4>您的购物车还是空空的，赶紧行动吧</h4>
                 </div>
                 <!--有内容时的样式-->
-                <div class="yestext">
+                <div class="yestext" >
                     <!--上面功能样式-->
                     <div class="yestext_box">
                         <div class="yestext_box1">
@@ -60,24 +60,25 @@
                         <div class="yestext_dianpu">
                             <input type="checkbox">
                             <span>店铺：</span>
-                            <span>小丁的旗舰店</span>
+                            <span>店铺名字</span>
                         </div>
                         <!--商品购物车详情-->
                         <div class="shoppdetailbox">
+                        <!--同一个店铺复制这个div -->
                             <div class="shoppdetail">
                                 <div class="detail_box1">
                                     <input  type="checkbox" name="shan">
                                 </div>
                                 <div class="detail_box2">
-                                    <img src="../assets/吉他.png">
-                                    <a>【55价】RENE CAOVILLA FROZEN白色水钻女士尖头露跟高跟鞋RC</a>
+                                    <img src="">
+                                    <a>0</a>
                                 </div>
                                 <div class="detail_box3">
-                                    尺码:xxx
+                                    尺码:商品尺码
                                 </div>
-                                <div class="detail_box4">￥9000</div>
+                                <div class="detail_box4">￥0</div>
                                 <div class="detail_box5">
-                                    <el-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
+                                    <el-input-number v-model="nu" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
                                 </div>
                                 <div class="detail_box6">￥9000</div>
                                 <div class="detail_box7">
@@ -85,113 +86,6 @@
                                 </div>
                             </div>
 
-                            <div class="shoppdetail">
-                                <div class="detail_box1">
-                                    <input  type="checkbox" name="shan">
-                                </div>
-                                <div class="detail_box2">
-                                    <img src="../assets/吉他.png">
-                                    <a>【55价】RENE CAOVILLA FROZEN白色水钻女士尖头露跟高跟鞋RC</a>
-                                </div>
-                                <div class="detail_box3">
-                                    尺码:xxx
-                                </div>
-                                <div class="detail_box4">￥9000</div>
-                                <div class="detail_box5">
-                                    <el-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
-                                </div>
-                                <div class="detail_box6">￥9000</div>
-                                <div class="detail_box7">
-                                    删除
-                                </div>
-                            </div>
-
-
-                            <div class="shoppdetail">
-                                <div class="detail_box1">
-                                    <input  type="checkbox" name="shan">
-                                </div>
-                                <div class="detail_box2">
-                                    <img src="../assets/吉他.png">
-                                    <a>【55价】RENE CAOVILLA FROZEN白色水钻女士尖头露跟高跟鞋RC</a>
-                                </div>
-                                <div class="detail_box3">
-                                    尺码:xxx
-                                </div>
-                                <div class="detail_box4">￥9000</div>
-                                <div class="detail_box5">
-                                    <el-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
-                                </div>
-                                <div class="detail_box6">￥9000</div>
-                                <div class="detail_box7">
-                                    删除
-                                </div>
-                            </div>
-
-                            <div class="shoppdetail">
-                                <div class="detail_box1">
-                                    <input  type="checkbox" name="shan">
-                                </div>
-                                <div class="detail_box2">
-                                    <img src="../assets/吉他.png">
-                                    <a>【55价】RENE CAOVILLA FROZEN白色水钻女士尖头露跟高跟鞋RC</a>
-                                </div>
-                                <div class="detail_box3">
-                                    尺码:xxx
-                                </div>
-                                <div class="detail_box4">￥9000</div>
-                                <div class="detail_box5">
-                                    <el-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
-                                </div>
-                                <div class="detail_box6">￥9000</div>
-                                <div class="detail_box7">
-                                    删除
-                                </div>
-                            </div>
-
-
-                            <div class="shoppdetail">
-                                <div class="detail_box1">
-                                    <input  type="checkbox" name="shan">
-                                </div>
-                                <div class="detail_box2">
-                                    <img src="../assets/吉他.png">
-                                    <a>【55价】RENE CAOVILLA FROZEN白色水钻女士尖头露跟高跟鞋RC</a>
-                                </div>
-                                <div class="detail_box3">
-                                    尺码:xxx
-                                </div>
-                                <div class="detail_box4">￥9000</div>
-                                <div class="detail_box5">
-                                    <el-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
-                                </div>
-                                <div class="detail_box6">￥9000</div>
-                                <div class="detail_box7">
-                                    删除
-                                </div>
-                            </div>
-
-
-                            <div class="shoppdetail">
-                                <div class="detail_box1">
-                                    <input  type="checkbox" name="shan">
-                                </div>
-                                <div class="detail_box2">
-                                    <img src="../assets/吉他.png">
-                                    <a>【55价】RENE CAOVILLA FROZEN白色水钻女士尖头露跟高跟鞋RC</a>
-                                </div>
-                                <div class="detail_box3">
-                                    尺码:xxx
-                                </div>
-                                <div class="detail_box4">￥9000</div>
-                                <div class="detail_box5">
-                                    <el-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
-                                </div>
-                                <div class="detail_box6">￥9000</div>
-                                <div class="detail_box7">
-                                    删除
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <!--店铺商品结尾-->
@@ -220,26 +114,95 @@
             </div>
         </div>
         <!--下面的导航条-->
-        <div></div>
+        <div>
+        <Base></Base>
+        </div>
     </div>
 </template>
 
 <script>
+
+import Base from './shared/base.vue'
     export default {
         name: "ShopTrolley",
         data() {
             return {
-                num: 1,
+                nu:1,
                 /*吸底效果*/
                 fixed: false,
-                height:''
+                height:'',
+                // 页面店铺商品数据
+                dinapu:'',
+                //店铺名字
+                dianpuname:[
+                    ],
+                
             };
         },
-        mounted () {
+        components:{
+        Base
+        },
+        mounted() {
             // console.log(window.getComputedStyle(this.$refs.tablewrap).height)
             /*吸底效果*/
             window.addEventListener('scroll', this.fixedActiveBtn)
             this.height= window.getComputedStyle(this.$refs.tablewrap).height
+            //判断用户是否登录
+            if(JSON.parse(window.sessionStorage.getItem('customername'))==null || JSON.parse(window.sessionStorage.getItem('customername'))=="null"){
+                this.$message.error('不好意思，您未登录哦');
+                this.$router.push('/buyerlogon')
+            };
+            //页面进来查找店铺和商品
+            let shopcusid =JSON.parse(window.sessionStorage.getItem('customerid'))
+            this.axios.get(`http://localhost:8080/merchant/page/shoptrolley?shopcusid=${shopcusid}`)
+            .then((response)=>{
+                this.dinapu=(response.data);
+                let arr1 =response.data;
+                console.log(this.dinapu);
+                for(let i=0;i<arr1.length;i++){
+                    let obj={
+                        name : arr1[i].店铺名字,
+                        //店铺id
+                        nameid:arr1[i].店铺id,
+                        //多选框
+                        checked : false,
+                        list : [{
+                            //商品名字
+                            name : arr1[i].goods_name,
+                            //商品id
+                            nameid:arr1[i].goods_id,
+                            //商品尺码
+                            size:arr1[i].商品尺码,
+                            //图片
+                            pho :arr1[i].goods_img,
+                            //数量
+                            num : arr1[i].商品数量,
+                            //单价
+                            price :arr1[i].goods_price,
+                            //金额
+                            fare : this.price*this.num,
+                            //会员优惠
+                            discount:arr1[i].goods_discount,
+                        }]
+                    }
+                    this.dianpuname.push(obj)
+                }
+
+                // 判断有没有商品，没有显示没有得页面
+                if(this.dinapu==""){
+                    document.querySelector('#noneimg').style.display='block'
+                    document.querySelector('.yestext').style.display='none'
+                    document.querySelector('.belfun').style.display='none'
+                    
+                }else{
+                    document.querySelector('#noneimg').style.display='none'
+                    document.querySelector('.yestext').style.display='block'
+                    document.querySelector('.belfun').style.display='block'
+                }
+            },(error)=>{
+                console.log(error);
+            })
+            
         },
         methods: {
             /*加减数量*/
@@ -251,14 +214,14 @@
                 // console.log(window.getComputedStyle(this.$refs.tablewrap).height)
                 // let height =window.getComputedStyle(this.$refs.tablewrap).height
                 // console.log($(window).height())
-                console.log(parseInt(this.height)-$(window).height())
                 let scrollTop =
                     window.pageYOffset ||
                     document.documentElement.scrollTop ||
                     document.body.scrollTop
                     scrollTop <= parseInt(this.height)-$(window).height() ? (this.fixed = true) : (this.fixed = false)
 
-            }
+            },
+            
         }
     }
 </script>

@@ -2,210 +2,28 @@
     <div id="Classification">
         <!-- 头部 -->
         <Header></Header>
-        <Search></Search>
+        <Search @abc='abc' @getdetails='getdetails' @sear='sear' @sear2='sear2'></Search>
         <!-- 筛选 -->
-        <Screen></Screen>
+        <Screen :goodslength='this.goodslength' @competition='competition'></Screen>
+        <!-- 在父组件中使用子组件 -->
         <div class="c-goods-list">
             <div class="c-goods-list-inner c-goods-list--normal">
-                <div class="c-goods-item  J-goods-item c-goods-item--auto-width">
-                    <a href="" target="_blank" rel="noopener">
+                <div class="c-goods-item  J-goods-item c-goods-item--auto-width" v-for="(item,index) in goods" :key='index'>
+                    <router-link :to="{path:'/particulars',query:{id:item.goods_id}}">
                         <div class="c-goods-item-top  c-goods-item-top--square">
                             <div class="c-goods-item__img">
-                                <img class="J-goods-item__img" src="//h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/106756/2021/0720/121/7c2be187-322f-4700-991d-49ad2b25260e_470x470_90.jpg" alt="男士风衣商务休闲修身风衣中长款风衣男" data-original="//h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/106756/2021/0720/121/7c2be187-322f-4700-991d-49ad2b25260e_470x470_90.jpg">
-                            </div>
-                            
-                            <div class="c-goods-item__brand-logo">
-                                <p>智源</p>
-                            </div>                            
+                                <img class="J-goods-item__img" :src='item.goods_img'>
+                            </div>                           
                         </div>
                         <div class="c-goods-item-bottom">
-                            <div class="c-goods-item__price  c-goods-item__price--one-line">
-                                <div class="c-goods-item__main-price J-goods-item__main-price">
-                                    <div class="c-goods-item__sale-price J-goods-item__sale-price"><span>¥</span>1680</div>
-                                </div>
-                            </div>
-                            <div class="c-goods-item__name  c-goods-item__name--two-line">男士风衣商务休闲修身风衣中长款风衣男</div>
-                            
-                            
-                            
-                        </div>
-                        
-                    </a>
-                </div>
-                <div class="c-goods-item  J-goods-item c-goods-item--auto-width">
-                    <a href="" target="_blank" rel="noopener">
-                        <div class="c-goods-item-top  c-goods-item-top--square">
-                            <div class="c-goods-item__img">
-                                <img class="J-goods-item__img" src="//h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/106756/2021/0720/121/7c2be187-322f-4700-991d-49ad2b25260e_470x470_90.jpg" alt="男士风衣商务休闲修身风衣中长款风衣男" data-original="//h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/106756/2021/0720/121/7c2be187-322f-4700-991d-49ad2b25260e_470x470_90.jpg">
-                            </div>
-                            
-                            <div class="c-goods-item__brand-logo">
-                                <p>智源</p>
-                            </div>                            
-                        </div>
-                        <div class="c-goods-item-bottom    ">
                             <div class="c-goods-item__price  c-goods-item__price--one-line  ">
                                 <div class="c-goods-item__main-price     J-goods-item__main-price">
-                                    <div class="c-goods-item__sale-price J-goods-item__sale-price"><span>¥</span>1680</div>
+                                    <div class="c-goods-item__sale-price J-goods-item__sale-price"><span>¥</span>{{item.goods_price}}</div>
                                 </div>
                             </div>
-                            <div class="c-goods-item__name  c-goods-item__name--two-line">男士风衣商务休闲修身风衣中长款风衣男</div>
-                            
-                            
-                            
+                            <div class="c-goods-item__name  c-goods-item__name--two-line">{{item.goods_name}}</div>
                         </div>
-                        
-                    </a>
-                </div>
-                <div class="c-goods-item  J-goods-item c-goods-item--auto-width">
-                    <a href="" target="_blank" rel="noopener">
-                        <div class="c-goods-item-top  c-goods-item-top--square">
-                            <div class="c-goods-item__img">
-                                <img class="J-goods-item__img" src="//h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/106756/2021/0720/121/7c2be187-322f-4700-991d-49ad2b25260e_470x470_90.jpg" alt="男士风衣商务休闲修身风衣中长款风衣男" data-original="//h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/106756/2021/0720/121/7c2be187-322f-4700-991d-49ad2b25260e_470x470_90.jpg">
-                            </div>
-                            
-                            <div class="c-goods-item__brand-logo">
-                                <p>智源</p>
-                            </div>                            
-                        </div>
-                        <div class="c-goods-item-bottom    ">
-                            <div class="c-goods-item__price  c-goods-item__price--one-line  ">
-                                <div class="c-goods-item__main-price     J-goods-item__main-price">
-                                    <div class="c-goods-item__sale-price J-goods-item__sale-price"><span>¥</span>1680</div>
-                                </div>
-                            </div>
-                            <div class="c-goods-item__name  c-goods-item__name--two-line">男士风衣商务休闲修身风衣中长款风衣男</div>
-                            
-                            
-                            
-                        </div>
-                        
-                    </a>
-                </div>
-                <div class="c-goods-item  J-goods-item c-goods-item--auto-width">
-                    <a href="" target="_blank" rel="noopener">
-                        <div class="c-goods-item-top  c-goods-item-top--square">
-                            <div class="c-goods-item__img">
-                                <img class="J-goods-item__img" src="//h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/106756/2021/0720/121/7c2be187-322f-4700-991d-49ad2b25260e_470x470_90.jpg" alt="男士风衣商务休闲修身风衣中长款风衣男" data-original="//h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/106756/2021/0720/121/7c2be187-322f-4700-991d-49ad2b25260e_470x470_90.jpg">
-                            </div>
-                            
-                            <div class="c-goods-item__brand-logo">
-                                <p>智源</p>
-                            </div>                            
-                        </div>
-                        <div class="c-goods-item-bottom    ">
-                            <div class="c-goods-item__price  c-goods-item__price--one-line  ">
-                                <div class="c-goods-item__main-price     J-goods-item__main-price">
-                                    <div class="c-goods-item__sale-price J-goods-item__sale-price"><span>¥</span>1680</div>
-                                </div>
-                            </div>
-                            <div class="c-goods-item__name  c-goods-item__name--two-line">男士风衣商务休闲修身风衣中长款风衣男</div>
-                            
-                            
-                            
-                        </div>
-                        
-                    </a>
-                </div>
-                <div class="c-goods-item  J-goods-item c-goods-item--auto-width">
-                    <a href="" target="_blank" rel="noopener">
-                        <div class="c-goods-item-top  c-goods-item-top--square">
-                            <div class="c-goods-item__img">
-                                <img class="J-goods-item__img" src="//h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/106756/2021/0720/121/7c2be187-322f-4700-991d-49ad2b25260e_470x470_90.jpg" alt="男士风衣商务休闲修身风衣中长款风衣男" data-original="//h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/106756/2021/0720/121/7c2be187-322f-4700-991d-49ad2b25260e_470x470_90.jpg">
-                            </div>
-                            
-                            <div class="c-goods-item__brand-logo">
-                                <p>智源</p>
-                            </div>                            
-                        </div>
-                        <div class="c-goods-item-bottom    ">
-                            <div class="c-goods-item__price  c-goods-item__price--one-line  ">
-                                <div class="c-goods-item__main-price     J-goods-item__main-price">
-                                    <div class="c-goods-item__sale-price J-goods-item__sale-price"><span>¥</span>1680</div>
-                                </div>
-                            </div>
-                            <div class="c-goods-item__name  c-goods-item__name--two-line">男士风衣商务休闲修身风衣中长款风衣男</div>
-                            
-                            
-                            
-                        </div>
-                        
-                    </a>
-                </div>
-                <div class="c-goods-item  J-goods-item c-goods-item--auto-width">
-                    <a href="" target="_blank" rel="noopener">
-                        <div class="c-goods-item-top  c-goods-item-top--square">
-                            <div class="c-goods-item__img">
-                                <img class="J-goods-item__img" src="//h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/106756/2021/0720/121/7c2be187-322f-4700-991d-49ad2b25260e_470x470_90.jpg" alt="男士风衣商务休闲修身风衣中长款风衣男" data-original="//h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/106756/2021/0720/121/7c2be187-322f-4700-991d-49ad2b25260e_470x470_90.jpg">
-                            </div>
-                            
-                            <div class="c-goods-item__brand-logo">
-                                <p>智源</p>
-                            </div>                            
-                        </div>
-                        <div class="c-goods-item-bottom    ">
-                            <div class="c-goods-item__price  c-goods-item__price--one-line  ">
-                                <div class="c-goods-item__main-price     J-goods-item__main-price">
-                                    <div class="c-goods-item__sale-price J-goods-item__sale-price"><span>¥</span>1680</div>
-                                </div>
-                            </div>
-                            <div class="c-goods-item__name  c-goods-item__name--two-line">男士风衣商务休闲修身风衣中长款风衣男</div>
-                            
-                            
-                            
-                        </div>
-                        
-                    </a>
-                </div>
-                <div class="c-goods-item  J-goods-item c-goods-item--auto-width">
-                    <a href="" target="_blank" rel="noopener">
-                        <div class="c-goods-item-top  c-goods-item-top--square">
-                            <div class="c-goods-item__img">
-                                <img class="J-goods-item__img" src="//h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/106756/2021/0720/121/7c2be187-322f-4700-991d-49ad2b25260e_470x470_90.jpg" alt="男士风衣商务休闲修身风衣中长款风衣男" data-original="//h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/106756/2021/0720/121/7c2be187-322f-4700-991d-49ad2b25260e_470x470_90.jpg">
-                            </div>
-                            
-                            <div class="c-goods-item__brand-logo">
-                                <p>智源</p>
-                            </div>                            
-                        </div>
-                        <div class="c-goods-item-bottom    ">
-                            <div class="c-goods-item__price  c-goods-item__price--one-line  ">
-                                <div class="c-goods-item__main-price     J-goods-item__main-price">
-                                    <div class="c-goods-item__sale-price J-goods-item__sale-price"><span>¥</span>1680</div>
-                                </div>
-                            </div>
-                            <div class="c-goods-item__name  c-goods-item__name--two-line">男士风衣商务休闲修身风衣中长款风衣男</div>
-                            
-                            
-                            
-                        </div>
-                        
-                    </a>
-                </div>
-                <div class="c-goods-item  J-goods-item c-goods-item--auto-width">
-                    <a href="" target="_blank" rel="noopener">
-                        <div class="c-goods-item-top  c-goods-item-top--square">
-                            <div class="c-goods-item__img">
-                                <img class="J-goods-item__img" src="//h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/106756/2021/0720/121/7c2be187-322f-4700-991d-49ad2b25260e_470x470_90.jpg" alt="男士风衣商务休闲修身风衣中长款风衣男" data-original="//h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/106756/2021/0720/121/7c2be187-322f-4700-991d-49ad2b25260e_470x470_90.jpg">
-                            </div>
-                            
-                            <div class="c-goods-item__brand-logo">
-                                <p>智源</p>
-                            </div>                            
-                        </div>
-                        <div class="c-goods-item-bottom    ">
-                            <div class="c-goods-item__price  c-goods-item__price--one-line  ">
-                                <div class="c-goods-item__main-price     J-goods-item__main-price">
-                                    <div class="c-goods-item__sale-price J-goods-item__sale-price"><span>¥</span>1680</div>
-                                </div>
-                            </div>
-                            <div class="c-goods-item__name  c-goods-item__name--two-line">男士风衣商务休闲修身风衣中长款风衣男</div>
-                            
-                            
-                            
-                        </div>
-                        
-                    </a>
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -223,12 +41,93 @@ export default {
     name: "Classification",
     data() {
         return {
-            
+            //商品的数据
+            goods:[],
+            goodslength:0
         }
     },
     components:{
         Header,Screen,Base,
         Search
+    },
+    mounted(){
+
+    },  
+    methods:{
+        abc(name){
+            console.log(name);
+            // 小分类的商品信息
+            this.axios
+                    .get(`http://localhost:8080/merchant/classificationDetails?name=${name}`)
+                    .then((response)=>{
+                        this.goods='';
+                        this.goods=response.data;
+                        this.goodslength=response.data.length
+                    //    console.log(this.goods);
+                    },(error)=>{
+                        console.log(error)
+                    })
+        },
+        getdetails(name){
+            this.axios
+                .get(`http://localhost:8080/merchant/classificationDetails/bigger?name=${name}`)
+                .then((response)=>{
+                    this.goods='';
+                    this.goods=response.data;
+                    this.goodslength=response.data.length
+                },(error)=>{
+                    console.log(error)
+                })
+        },
+        //搜索框搜索出来的内容
+        sear(name){
+            this.axios
+                .get(`http://localhost:8080/merchant/classificationDetails/sears?name=${name}`)
+                .then((response)=>{
+                    this.goods='';
+                    this.goods=response.data;
+                    this.goodslength=response.data.length
+                },(error)=>{
+                    console.log(error)
+                })
+        },
+        // 点击搜索框按钮搜索出来的商品
+        sear2(name){
+             this.axios
+                .get(`http://localhost:8080/merchant/classificationDetails/sears2?name=${name}`)
+                .then((response)=>{
+                    this.goods='';
+                    this.goods=response.data;
+                    this.goodslength=response.data.length
+                },(error)=>{
+                    console.log(error);
+                })
+        },
+        // 赛选价格的商品
+        competition(minimum,maximum){
+            let min=minimum*1;
+            let max=maximum*1;
+            let shop=[];
+            console.log(this.goods);
+            for (let i = 0; i < this.goods.length; i++) {
+                let price=this.goods[i].goods_price;
+                if(price>=min && price<=max){
+                    // console.log(this.goods[i]);
+                    shop.push(this.goods[i])
+                }
+            }
+            this.goods=[];
+            for (let j = 0; j < shop.length; j++) {
+                // console.log(shop[j]);
+                this.goods.push(shop[j]);
+            }
+            this.goodslength=this.goods.length
+            // console.log(this.goods);
+        }
+
+    },
+    computed:{
+        
     }
 }
 </script>
@@ -261,6 +160,7 @@ img {
     min-height: 300px;
     margin-top: 20px;
     position: relative;
+    z-index: 4;
 }
 .c-goods-list-inner {
     width: 1020px;
