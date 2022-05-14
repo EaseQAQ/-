@@ -58,7 +58,9 @@
                                 <dt class="size-name">尺码</dt>
                                 <dd class="size-list">
                                     <el-radio-group v-model="radio" size="mini">
-                                        <el-radio border v-for="(item,index) in this.goodssize" :key="index" label="index">{{item.goods_size}}</el-radio>
+                                        <div  v-for="(item,index) in this.goodssize" :key="index"  @click="getsize(item.goods_size)" style="float:left;margin-right:10px;">
+                                            <el-radio border :label='index'>{{item.goods_size}}</el-radio>
+                                        </div>
                                     </el-radio-group>
                                 </dd>
                             </dl>
@@ -73,7 +75,7 @@
                                 <button title="点击此按钮，到下一步确认购买信息" class="J_LinkBuy" @click="buynow">立即购买</button>
                             </div>
                             <div class="tb-btn-add">
-                                <button title="加入购物车" class="J_LinkAdd" @click="addTrolley">加入购物车</button>
+                                <button :plain="true" title="加入购物车" class="J_LinkAdd" @click="addTrolley">加入购物车</button>
                             </div>
                         </div>
                     </div>
@@ -101,8 +103,14 @@ export default {
             goodsimg:'',
             // 商品尺码
             goodssize:'',
+            dansize:'S',
             // 商品的店铺名
-            sellname:''
+            sellname:'',
+            gooodsnum:1,
+            // 商品id
+            sid:0,
+            // 店铺id
+            did:0
         }
     },
     props:['id'],
@@ -110,6 +118,7 @@ export default {
         Header,Base,Search
     },
     mounted(){
+        console.log('从分类页拿到的商品id：'+this.id);
         // 商品的详情
         this.axios
             .get(`http://localhost:8080/merchant/partic?id=${this.id}`)
@@ -117,7 +126,9 @@ export default {
                 this.goodsname=response.data[0].goods_name;
                 this.goodsprice=response.data[0].goods_price;
                 this.goodsimg=response.data[0].goods_img;
-                this.sellname=response.data[0].sel_store
+                this.sellname=response.data[0].sel_store;
+                this.sid=response.data[0].goods_id;
+                this.did=response.data[0].sel_id;
                 // console.log(this.goodsname,this.goodsprice,this.goodsimg);
             },(error)=>{
                 console.log(error)
@@ -127,24 +138,40 @@ export default {
             .get(`http://localhost:8080/merchant/partic/goodssize?id=${this.id}`)
             .then((response)=>{
                 this.goodssize=response.data;
-                console.log(this.goodssize);
+                // console.log(this.goodssize);
             },(error)=>{
                 // console.log(456);
                 console.log(error)
             })
     },
     methods:{
+        // 结算
         buynow(){
             console.log('正在前往结算');
         },
-        addTrolley(){
-            console.log('添加购物车成功');
-        },
-        addnum(){
-            console.log('数量加1');
-        },
+        // 数量
         handleChange(value) { 
-            console.log(value); 
+            this.gooodsnum=value;
+            // console.log(this.gooodsnum);
+        },
+        // 尺码
+        getsize(size){
+            this.dansize=size;
+        },
+        // 添加购物车
+        addTrolley(){
+            let name=JSON.parse(window.sessionStorage.getItem('customerid'))
+            console.log(this.dansize);
+            this.axios
+                .get(`http://localhost:8080/merchant/partic/addcart?sid=${this.sid}&num=${this.gooodsnum}&size=${this.dansize}&uid=${name}&did=${this.did}`)
+                .then((response)=>{
+                    this.$message({
+                        message: '购物车添加成功',
+                        type: 'success'
+                        })
+                },(error)=>{
+                    console.log(error)
+                })
         }
     }
 }

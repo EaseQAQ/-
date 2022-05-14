@@ -17,14 +17,15 @@
                         <el-input placeholder="请输入内容" clearable v-model="input" @input="sear"></el-input>
                         <el-button type="primary" icon="el-icon-search" @click="sear2">搜索</el-button>
                     </div>
+                    <div class="c-search_below">
+                        <ul class="list-group">
+                            <li class="list-group-item" v-for="(item,index) in this.inputdata" :key="index" @click="sears(item.goods_name)">
+                                <router-link to="/classification">{{item.goods_name}}</router-link>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="c-search_below">
-                    <ul class="list-group">
-                        <li class="list-group-item" v-for="(item,index) in this.inputdata" :key="index" @click="sears(item.goods_name)">
-                            <router-link to="/classification">{{item.goods_name}}</router-link>
-                        </li>
-                    </ul>
-                </div>
+                
 
         </div>
         <!-- 商品导航 -->
@@ -58,7 +59,7 @@
                                         </dl>
                                     </div>
                                 </div>
-                             </div>
+                            </div>
                         </div>
                     </div>
                     <!-- 分类 end -->
@@ -204,8 +205,6 @@ export default {
     background-color: white;
     border: 1px solid #ff4400;
     position: absolute;
-    top: 110px;
-    left: 510px;
     z-index: 10;
     border-radius: 7px;
 }

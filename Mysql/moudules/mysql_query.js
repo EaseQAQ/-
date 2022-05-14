@@ -1,4 +1,5 @@
 //共同的查询数据
+//共同的查询数据
 import mysql from 'mysql';
 import {config} from './mysql_config.js';
 let pool =mysql.createPool(config)
@@ -14,4 +15,3 @@ let query_api={
     }
 }
 export {query_api}
-// module.exports=seller_api;

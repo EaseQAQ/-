@@ -23,41 +23,72 @@
                 <el-button type="primary" round>发布商品</el-button>
                 <el-button type="primary" round>批量删除</el-button>
             </div>
-            <div id="shoppnum">共<em>0</em>件商品</div>
+            <div id="shoppnum">共<em v-if="sum">{{sum[0].osum}}</em>件商品</div>
         </div>
         <!--表格-->
         <div class="tab">
-            <el-table :data="tableData" border style="width: 100%">
-                <el-table-column type="selection" width="55">
-                </el-table-column>
-                <el-table-column fixed prop="product" label="商品名称" width="230">
-                </el-table-column>
-                <el-table-column prop="price" label="价格" width="100">
-                </el-table-column>
-                <el-table-column prop="inventory" label="库存" width="100">
-                </el-table-column>
-                <el-table-column prop="salesVolume" label="销量" width="100">
-                </el-table-column>
-                <el-table-column prop="classify" label="分类" width="160">
-                </el-table-column>
+            <el-table :data="userlist" border style="width: 100%">
+                <el-table-column type="selection" width="55"></el-table-column>
+                <el-table-column fixed prop="goods_id" label="商品ID" width="80"></el-table-column>
+                <el-table-column prop="goods_name" label="商品名称" width="400"></el-table-column>
+                <el-table-column prop="goods_price" label="价格" width="100"></el-table-column>
+                <el-table-column prop="SUM(goods_stock)" label="库存" width="100"></el-table-column>
+                <el-table-column prop="goods_gender" label="分类" width="160"></el-table-column>
                 <el-table-column fixed="right" label="操作" width="100">
-                <template slot-scope="scope">
-                    <el-button @click="handleClick(scope.row)" type="text" size="small">下架</el-button>
-                    <el-button type="text" size="small">编辑</el-button>
-                </template>
+                    <template #default="scope">
+                        <el-button @click="del(scope.row.goods_id)" type="text" size="small">下架</el-button>
+                        <el-button type="text" size="small">编辑</el-button>
+                    </template>
                 </el-table-column>
             </el-table>
+            <el-pagination background layout="prev, pager, next" v-if="sum" :total="sum[0].osum" :page-size="size" @current-change="changePage"></el-pagination>
         </div>
     </div>
 </template>
 
 <script>
     export default {
+        inject:['reload'],
         name: "commodity",
+        data() {
+            return {
+                userlist: [],
+                sum:'',
+                size: 50,
+                currentPage: 1,
+                restaurants: [],
+                state1: '',
+                state2: '',
+            }
+        },
         methods: {
-            handleClick(row) {
-                console.log(row);
+            del(row){
+                let id = row
+                console.log(id)
+                this.axios.get(`http://localhost:8080/merchant//seller/sellerCenter/delcommodity?sel_id=${id}`).
+                then(res=>{
+                    console.log("成功");
+                    this.reload();
+                })
+                .catch(err=>{
+                    console.log("操作失败" + err);
+                })
             },
+            changePage(currentPage) {
+                const sid = parseInt(sessionStorage.getItem('sellerid'));
+                console.log(sid);
+                let size=parseInt(this.size)
+                console.log(size);
+                let current=parseInt((currentPage-1)*this.size)
+                console.log(current);
+                this.axios.get(`http://localhost:8080/merchant/seller/sellerCenter/paging?sel_id=${sid}&size=${size}&current=${current}`).then((response)=> {
+                    this.userlist =response.data
+                    console.log(this.userlist);
+                }).catch(err=>{
+                    console.log("获取数据失败" + err);
+                })
+            },
+            // 
             querySearch(queryString, cb) {
                 var restaurants = this.restaurants;
                 var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
@@ -122,26 +153,26 @@
                 ];
             },
             handleSelect(item) {
-                console.log(item);
+                // console.log(item);
             }
         },
         mounted() {
             this.restaurants = this.loadAll();
+            const id = parseInt(sessionStorage.getItem('sellerid'));
+            console.log(id);
+            this.axios.get(`http://localhost:8080/merchant/seller/sellerCenter/commodity?sel_id=${id}`).then((response) => {
+                this.userlist =response.data
+                console.log(this.userlist);
+            }).catch(err=>{
+                console.log("获取数据失败" + err);
+            }),
+            this.axios.get(`http://localhost:8080/merchant/seller/sellerCenter/commoditysum?sel_id=${id}/1/50`).then((response) => {
+                this.sum =response.data
+                console.log(this.sum[0]);
+            }).catch(err=>{
+                console.log("获取数据失败" + err);
+            })
         },
-        data() {
-            return {
-                tableData: [{
-                    product: '12312',
-                    price: '12',
-                    inventory: '30',
-                    salesVolume: '0',
-                    classify:'萨达'
-                }],
-                    restaurants: [],
-                    state1: '',
-                    state2: ''
-            }
-        }
     }
 </script>
 

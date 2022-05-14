@@ -46,10 +46,7 @@
     </div>
 
     <!--登录抽屉-->
-    <el-drawer
-            :visible.sync="drawer"
-            :direction="direction"
-            :before-close="handleClose">
+    <el-drawer :visible.sync="drawer" :direction="direction" :before-close="handleClose">
       <!--登录-->
       <div id="loginbox">
         <p class="shangjia">商家登录</p>
@@ -66,6 +63,7 @@
             <a href="#" class="zhanhbox" @click="loginboxOn">没有账号？点击注册</a>
           </el-form-item>
         </el-form>
+        <div id="boximg"></div>
       </div>
       <!--注册-->
       <div id="registerbox">
@@ -80,14 +78,21 @@
           <el-form-item label="店铺名字" prop="zname" class="yongone">
             <el-input class="yong" type="text" v-model="zruleForm.zname" placeholder="请输入店铺名字，长度不能超过20"></el-input>
           </el-form-item>
+          <el-form-item label="手机号" prop="zpho" class="yongone">
+            <el-input class="yong" type="text" v-model="zruleForm.zpho" placeholder="请输入手机号码"></el-input>
+          </el-form-item>
+          <!-- 选择店铺类型 -->
+          <div class="selectbox">
+            <el-select v-model="value" clearable placeholder="请选择店铺类型">
+              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+            </el-select>
+          </div>
           <el-form-item>
             <el-button type="primary" @click="zsubmitForm('zruleForm')">注册</el-button>
             <el-button @click="resetForm('zruleForm')">重置</el-button>
             <a href="#" class="zhanhbox" @click="registerboxOn">已有账号？点击登录</a>
           </el-form-item>
         </el-form>
-      </div>
-      <div id="boximg">
       </div>
     </el-drawer>
   </div>
@@ -104,17 +109,6 @@ export default {
       }else {
         callback();
       }
-      // setTimeout(() => {
-      //   if (!Number.isInteger(value)) {
-      //     callback(new Error('请输入数字值'));
-      //   } else {
-      //     if (value < 18) {
-      //       callback(new Error('必须年满18岁'));
-      //     } else {
-      //       callback();
-      //     }
-      //   }
-      // }, 1000);
     };
     let validatePass = (rule, value, callback) => {
       if (value === '') {
@@ -132,17 +126,6 @@ export default {
       } else {
         callback();
       }
-      // setTimeout(() => {
-      //   if (!Number.isInteger(value)) {
-      //     callback(new Error('请输入数字值'));
-      //   } else {
-      //     if (value < 18) {
-      //       callback(new Error('必须年满18岁'));
-      //     } else {
-      //       callback();
-      //     }
-      //   }
-      // }, 1000);
     };
     let zvalidatePass = (rule, value, callback) => {
       if (value === '') {
@@ -160,6 +143,16 @@ export default {
         return callback(new Error('店铺名不规范'));
       }else {
         callback();
+      }
+    };
+    let zphoyz=(rule, value, callback) => {
+      let reg =/^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/;
+      if (value === '') {
+          callback(new Error('请输入手机号'));
+      } else if(value.length<11 || !reg.test(value)){
+          return callback(new Error('手机号码不规范'));
+      }else {
+          callback();
       }
     };
     return {
@@ -184,6 +177,7 @@ export default {
         zpass: '',
         zage: '',
         zname:'',
+        zpho:''
       },
       zrules: {
         zpass: [
@@ -194,9 +188,30 @@ export default {
         ],
         zname:[
           { validator: zchexckname, trigger: 'blur' }
+        ],
+        zpho:[
+          { validator: zphoyz, trigger: 'blur' }
         ]
       },
+      // 下拉选择框
+      options: [],
+      value: '',
     };
+  },
+  mounted() {
+    //页面进来获取下拉款的数据赋值
+    this.axios.get(`http://localhost:8080/merchant/seller/select`)
+    .then((response)=>{
+      console.log(response.data);
+      for(let i=0;i<response.data.length;i++){
+        this.options.push({
+          value:response.data[i].category_id,
+          label:response.data[i].category_name
+        })
+      }
+    },(error)=>{
+      console.log(error);
+    })
   },
   methods: {
     /*点击更换登录注册页面方法*/
@@ -224,9 +239,23 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {//规范成功
-          alert('submit!');
-          console.log(this.ruleForm.age)
-          console.log(this.ruleForm.pass)
+          this.axios.get(`http://localhost:8080/merchant/seller?name=${this.ruleForm.age}&pas=${this.ruleForm.pass}`).then((response)=>{
+            // 数组长度为1则登录成功 数组长度为0则登录失败
+            if(response.data.length==0){//登录失败，提醒用户
+              console.log("失败");
+              this.$notify.error({
+              message: '用户名或者密码错误'
+              });
+            }else{//成功后存入session跳转前一个页面
+              window.sessionStorage.setItem("sellername",JSON.stringify(this.ruleForm.age))
+              window.sessionStorage.setItem("sellerid",JSON.stringify(response.data[0].sel_id))
+              this.$router.push({
+                path: "/carback_stage",
+              });
+            }
+          },(error)=>{
+            console.log(error);
+          })
         } else {//规范失败
           console.log('error submit!!');
           return false;
@@ -240,15 +269,43 @@ export default {
     zsubmitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {//规范成功
-          alert('注册！');
-          console.log(this.zruleForm.zage)
-          console.log(this.zruleForm.zpass)
+          let age=this.zruleForm.zage
+          let pas=this.zruleForm.zpass
+          let name=this.zruleForm.zname
+          let pho=this.zruleForm.zpho
+          let num=this.value
+          let genre='';
+          for(let i=0;i<this.options.length;i++){
+              if(this.options[i].value==num){
+                genre=this.options[i].label+"店"
+              }
+          }
+          console.log(age,pas,name,pho,genre);
+          this.axios.get(`http://localhost:8080/merchant/seller/zu?zage=${age}&zpas=${pas}&zname=${name}&value=${genre}&zpho=${pho}`).then((response)=>{
+            if(response.data=='yes'){
+              //显示登录页面
+              document.querySelector('#registerbox').style.display='none'
+              //隐藏注册页面
+              document.querySelector('#loginbox').style.display='block'
+              return;
+            }
+            //如果数据的长度是1就代表用户名存在0代表用户名不存在,yes就是存储成功
+            if(response.data.length==0){//没有用户名
+              
+              }else{//有用户名进行提醒
+                this.$notify.error({
+                  message: '用户名已经存在，请重新输入'
+                });
+              }
+          },(error)=>{
+            console.log("错误"+error);
+          })
         } else {//规范失败
           console.log('error submit!!');
           return false;
         }
       });
-    },
+    }
   }
 }
 </script>
@@ -404,6 +461,15 @@ export default {
   /*注册盒子*/
   #registerbox{
     display: none;
+  }
+  #registerbox>>>.el-input{
+    width: 308px;
+  }
+  #registerbox>>>.el-input__inner{
+    width: 308px;
+  }
+  .selectbox{
+    margin: 0px 0px 20px 100px;
   }
   /*点击a标签切换按钮*/
   .zhanhbox{

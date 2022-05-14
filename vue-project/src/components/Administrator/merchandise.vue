@@ -2,7 +2,7 @@
     <div>
         <div class="sonRoute">
             <div class="headline">
-                <h2>商家管理</h2>
+                <h2>商品类型管理<em>(111)</em></h2>
             </div>
             <!--导航功能-->
             <div class="filtrate">
@@ -31,13 +31,21 @@
                 <el-table :data="tableData" border style="width: 100%">
                     <el-table-column type="selection" width="55">
                     </el-table-column>
-                    <el-table-column fixed prop="shopName" label="商品类型" width="250">
+                    <el-table-column fixed prop="category_id" label="类型ID" width="100">
                     </el-table-column>
-                    <el-table-column fixed="right" label="操作" width="100">
+                    <el-table-column fixed prop="category_name" label="分类类型" width="100">
+                    </el-table-column>
+                    <el-table-column fixed prop="category_state" label="销售状态" width="100">
+                    </el-table-column>
+                    <el-table-column fixed prop="cateDetail_id" label="详情ID" width="100">
+                    </el-table-column>
+                    <el-table-column fixed prop="cateDetail_name" label="详情类型" width="120">
+                    </el-table-column>
+                    <el-table-column fixed="right" label="操作" width="120">
                     <template slot-scope="scope">
-                        <el-button @click="handleClick(scope.row)" type="text" size="small">冻结</el-button>
+                        <el-button type="text" size="small">冻结</el-button>
                         <el-button type="text" size="small">解冻</el-button>
-                        <el-button type="text" size="small">删除</el-button>
+                        <el-button @click="del(scope.row.cateDetail_name)" type="text" size="small">删除</el-button>
                     </template>
                     </el-table-column>
                 </el-table>
@@ -48,11 +56,17 @@
 
 <script>
     export default {
-        name: "merchandise",
+        name: "merchandise",        
+        data() {
+            return {
+                tableData: [],
+                restaurants: [],
+                state1: '',
+                state2: '',
+                cateDetail_name:''
+            }
+        },
         methods: {
-            handleClick(row) {
-                console.log(row);
-            },
             querySearch(queryString, cb) {
                 var restaurants = this.restaurants;
                 var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
@@ -118,20 +132,44 @@
             },
             handleSelect(item) {
                 console.log(item);
+            },
+            sear(){
+                console.log(this.input);
+                if(!this.input==''){
+                    this.axios
+                    .get(`http://localhost:8080/merchant/admin/selectorder?order_id=${this.input}`)
+                    .then((response)=>{
+                        this.inputdata='';
+                        this.inputdata=response.data;
+                        console.log(this.inputdata);
+                    },(error)=>{
+                        console.log(error)
+                    })
+                }else{
+                    document.querySelector('.c-search_below').style.display='none';
+                }
+            },
+            del(row){
+                let id = row
+                console.log(id)
+                this.axios.get(`http://localhost:8080/merchant/admin/delmerchandise?id=${id}`).
+                then(res=>{
+                    console.log("成功");
+                })
+                .catch(err=>{
+                    console.log("操作失败" + err);
+                })
             }
+
         },
         mounted() {
             this.restaurants = this.loadAll();
-        },
-        data() {
-            return {
-                tableData: [{
-                    shopName: '大大王',
-                }],
-                    restaurants: [],
-                    state1: '',
-                    state2: ''
-            }
+            this.axios.get('http://localhost:8080/merchant/admin/merchandise').then((response) => {
+                this.cateDetail_name=response.data[0].cateDetail_name
+                this.tableData =response.data
+            }).catch(err=>{
+                console.log("获取数据失败" + err);
+            })
         }
     }
 </script>

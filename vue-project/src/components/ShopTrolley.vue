@@ -1,12 +1,13 @@
 <template>
     <div>
+        <Header></Header>
         <!--导航条-->
         <div id="shopphead">
             <!--外面的盒子-->
             <div id="shopphead_cener">
                 <!--图片-->
                 <div id="cener_img">
-                    <img  src="https://s2.loli.net/2022/04/26/fatzBqwgdC1y68K.png"/>
+                    <a href="/"><img src="https://s2.loli.net/2022/04/26/fatzBqwgdC1y68K.png"/></a>
                 </div>
                 <!--搜索-->
                 <div id="cener_ss">
@@ -27,11 +28,11 @@
                 <!--上面的到导航条-->
                 <div id="shoppbox_box1">
                     <!--左边的样式-->
-                    <div id="box1_left">购物车 （全部1）</div>
+                    <div id="box1_left">购物车 （全部{{dianpuname.length}}）</div>
                     <!--右边的样式-->
                     <div id="box1_rigth">
-                        <span>已选商品（1件）</span>
-                        <span>0.00</span>
+                        <span>已选商品（{{xuans}}件）</span>
+                        <span>{{zfare}}</span>
                         <button class="but">结 &nbsp;算</button>
                     </div>
                 </div>
@@ -46,7 +47,7 @@
                     <!--上面功能样式-->
                     <div class="yestext_box">
                         <div class="yestext_box1">
-                            <input type="checkbox" name="quan">全选
+                            <input type="checkbox" name="quan" v-model="topchecked" @click="topcheck">全选
                         </div>
                         <div class="yestext_box2">商品信息</div>
                         <div class="yestext_box3">单价</div>
@@ -55,33 +56,33 @@
                         <div class="yestext_box6">操作</div>
                     </div>
                     <!--店铺商品内容-->
-                    <div>
+                    <div v-for="(item,index) in this.dianpuname" :key="index">
                         <!--店铺导航-->
-                        <div class="yestext_dianpu">
-                            <input type="checkbox">
-                            <span>店铺：</span>
-                            <span>店铺名字</span>
+                        <div class="yestext_dianpu" :id="item.shopid">
+                            <!-- <input type="checkbox"> -->
+                            <span :id="item.nameid">店铺：</span>
+                            <span>{{item.name}}</span>
                         </div>
                         <!--商品购物车详情-->
-                        <div class="shoppdetailbox">
+                        <div class="shoppdetailbox" v-for="(ite,ind) in item.list" :key="ind">
                         <!--同一个店铺复制这个div -->
-                            <div class="shoppdetail">
+                            <div class="shoppdetail" :id="ite.nameid">
                                 <div class="detail_box1">
-                                    <input  type="checkbox" name="shan">
+                                    <input  type="checkbox" name="shan" v-model="ite.checked" @click="getClickInfo">
                                 </div>
                                 <div class="detail_box2">
-                                    <img src="">
-                                    <a>0</a>
+                                    <img :src="ite.pho">
+                                    <a>{{ite.name}}</a>
                                 </div>
                                 <div class="detail_box3">
-                                    尺码:商品尺码
+                                    尺码:{{ite.size}}
                                 </div>
-                                <div class="detail_box4">￥0</div>
+                                <div class="detail_box4">￥{{ite.price}}</div>
                                 <div class="detail_box5">
-                                    <el-input-number v-model="nu" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
+                                    <el-input-number :id="item.shopid" ref="test" v-model="ite.num" @change="handleChange" :min="1" :max="10" label="描述文字">{{item.shopid}}</el-input-number>
                                 </div>
-                                <div class="detail_box6">￥9000</div>
-                                <div class="detail_box7">
+                                <div class="detail_box6">￥<em>{{ite.fare}}</em></div>
+                                <div class="detail_box7" @click="del" >
                                     删除
                                 </div>
                             </div>
@@ -95,19 +96,19 @@
                     <!--左边的功能-->
                     <div class="belfun_left">
                         <div class="belfun_left1">
-                            <input type="checkbox">全选
+                            <input type="checkbox" v-model="topchecked" @click="topcheck">全选
                         </div>
-                        <div class="belfun_left2">删除</div>
+                        <div class="belfun_left2" @click="alldel">删除</div>
                     </div>
                     <!--右边的功能-->
                     <div class="belfun_right">
                         <div class="belfun_right1">
                             <span>已选商品</span>
-                            <span>0</span>
+                            <span>{{xuans}}</span>
                             <span>件</span>
                         </div>
                         <div class="belfun_right2">合计：</div>
-                        <div class="belfun_right3">0.00</div>
+                        <div class="belfun_right3">{{zfare}}</div>
                         <button class="but">结 &nbsp;算</button>
                     </div>
                 </div>
@@ -122,25 +123,30 @@
 
 <script>
 
+import Header from './shared/header.vue';
 import Base from './shared/base.vue'
     export default {
         name: "ShopTrolley",
         data() {
             return {
-                nu:1,
+                nu:0,
                 /*吸底效果*/
                 fixed: false,
                 height:'',
                 // 页面店铺商品数据
                 dinapu:'',
                 //店铺名字
-                dianpuname:[
-                    ],
-                
+                dianpuname:[],
+                //全选
+                topchecked:false,
+                //选了几件商品
+                xuans:0,
+                //总金额
+                zfare:0,
             };
         },
         components:{
-        Base
+            Base,Header
         },
         mounted() {
             // console.log(window.getComputedStyle(this.$refs.tablewrap).height)
@@ -161,11 +167,10 @@ import Base from './shared/base.vue'
                 console.log(this.dinapu);
                 for(let i=0;i<arr1.length;i++){
                     let obj={
+                        shopid:arr1[i].购物车id,
                         name : arr1[i].店铺名字,
                         //店铺id
                         nameid:arr1[i].店铺id,
-                        //多选框
-                        checked : false,
                         list : [{
                             //商品名字
                             name : arr1[i].goods_name,
@@ -179,15 +184,16 @@ import Base from './shared/base.vue'
                             num : arr1[i].商品数量,
                             //单价
                             price :arr1[i].goods_price,
-                            //金额
-                            fare : this.price*this.num,
                             //会员优惠
                             discount:arr1[i].goods_discount,
+                            //多选框
+                            checked : false,
+                            //金额
+                            fare: arr1[i].goods_price *arr1[i].商品数量,
                         }]
                     }
                     this.dianpuname.push(obj)
                 }
-
                 // 判断有没有商品，没有显示没有得页面
                 if(this.dinapu==""){
                     document.querySelector('#noneimg').style.display='block'
@@ -208,6 +214,7 @@ import Base from './shared/base.vue'
             /*加减数量*/
             handleChange(value) {
                 console.log(value);
+                console.log(this.$refs.test)
             },
             /*吸底效果*/
             fixedActiveBtn () {
@@ -219,9 +226,61 @@ import Base from './shared/base.vue'
                     document.documentElement.scrollTop ||
                     document.body.scrollTop
                     scrollTop <= parseInt(this.height)-$(window).height() ? (this.fixed = true) : (this.fixed = false)
-
             },
-            
+            //点击全选后选中商品
+            topcheck(){
+                console.log(123);
+                if(this.topchecked==true){//如果是全选，就将内容全部选中
+                    // console.log(this.dianpuname);
+                    // this.dianpuname.list[0].checked=true;
+                    for(let i=0;i<this.dianpuname.length;i++){
+                        //修改全选
+                        this.dianpuname[i].list[0].checked=false;
+                        //
+                    }
+                    this.xuans=0
+                    this.zfare=0
+                    this.nu=0
+                }else{
+                    // this.dianpuname.list[0].checked=false ;
+                    // console.log(this.dianpuname);
+                    for(let i=0;i<this.dianpuname.length;i++){
+                        this.dianpuname[i].list[0].checked=true;
+                        this.zfare+=this.dianpuname[i].list[0].fare
+                    }
+                    this.xuans=this.dianpuname.length
+                    this.nu=3
+                };
+            },
+            //点击单独的商品
+            getClickInfo(even){
+                let e =(event.target);   // target 获取当前点击节点
+                let mon=(e.parentElement.parentElement.children[5].children[0].innerText);
+                if(e.checked==true){//点击成了选中状态后将值和价钱更改
+                    this.xuans++;
+                    //更改价钱
+                    this.zfare+=parseInt(mon) ;
+                    this.nu+=1;
+                }else{
+                    this.xuans--;
+                    this.zfare-=mon;
+                    this.nu--;
+                }
+                console.log(this.nu);
+                    if(this.nu==this.dianpuname.length){
+                        this.topchecked=true
+                    }else{
+                        this.topchecked=false
+                    }
+            },
+            //单个删除
+            del(even){
+                
+            },
+            //全部删除
+            alldel(){
+
+            }
         }
     }
 </script>
@@ -249,9 +308,10 @@ import Base from './shared/base.vue'
     #cener_img{
         float: left;
     }
-    #cener_img>img{
+    #cener_img>a,#cener_img>a>img{
         height: 58px;
     }
+    
     /*导航条搜索的样式*/
     #cener_ss{
         width: 424px;

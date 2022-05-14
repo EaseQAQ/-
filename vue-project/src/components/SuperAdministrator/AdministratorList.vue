@@ -41,8 +41,8 @@
                     <!-- <el-table-column prop="classify" label="管理分类" width="150">
                     </el-table-column> -->
                     <el-table-column fixed="right" label="操作" width="130">
-                    <template slot-scope="scope">
-                        <el-button @click="removeUserById(scope.row.id)" type="text" size="small">删除</el-button>
+                    <template #default="scope">
+                        <el-button @click="del(scope.row.sel_id)" type="text" size="small">删除</el-button>
                         <el-button type="text" size="small">修改权限</el-button>
                     </template>
                     </el-table-column>
@@ -53,8 +53,8 @@
 </template>
 
 <script>
-
     export default {
+        inject:['reload'],
         name: "AdministratorList",
         data() {
             return {
@@ -68,8 +68,17 @@
             
         // },
         methods: {
-            handleClick(row) {
-                console.log(row);
+            del(row){
+                let id = row
+                console.log(id)
+                this.axios.get(`http://localhost:8080/merchant/admin/superadmin/superadmin?id=${id}`).
+                then(res=>{
+                    console.log("成功");
+                    this.reload();
+                })
+                .catch(err=>{
+                    console.log("操作失败" + err);
+                })
             },
             querySearch(queryString, cb) {
                 var restaurants = this.restaurants;
@@ -140,7 +149,7 @@
         },
         mounted() {
             this.restaurants = this.loadAll();
-            this.axios.get('http://localhost:8080/merchant/admin/superadmin').then((response) => {
+            this.axios.get('http://localhost:8080/merchant/admin/superadmin/superadmin').then((response) => {
                 this.userlist =response.data
             }).catch(err=>{
                 console.log("获取数据失败" + err);

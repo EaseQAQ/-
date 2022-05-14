@@ -59,14 +59,14 @@
 
 <script>
     export default {
+        inject:['reload'],
         name: "UsersList",
         data() {
             return {
                 userlist: [],
                 restaurants: [],
                 state1: '',
-                state2: '',
-                cust_id:''
+                state2: ''
             }
         },
         methods: {
@@ -139,9 +139,10 @@
             del(row){
                 let id = row
                 console.log(id)
-                this.axios.get(`http://localhost:8080/merchant/admin/delcustomer?id=${id}`).
+                this.axios.get(`http://localhost:8080/merchant/admin/superadmin/delcustomer?id=${id}`).
                 then(res=>{
                     console.log("成功");
+                    this.reload();
                 })
                 .catch(err=>{
                     console.log("操作失败" + err);
@@ -150,7 +151,7 @@
         },
         mounted() {
             this.restaurants = this.loadAll();
-            this.axios.get('http://localhost:8080/merchant/admin/customer').then((response) => {
+            this.axios.get('http://localhost:8080/merchant/admin/superadmin/customer').then((response) => {
                 this.cust_id=response.data[0].cust_id
                 this.userlist =response.data
             }).catch(err=>{

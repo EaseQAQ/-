@@ -25,6 +25,8 @@ import CarBack_Stage from "@/components/CarBack_Stage";
     import OrderM from "@/components/CarBack_Stage/OrderM";
 // 个人中心
 import Personal_center from "@/components/Personal_center";
+    // 我的订单
+    import Myorder from "@/components/Personal_center/Myorder";
     // 个人信息
     import Personal from "@/components/Personal_center/Personal";
     // 个人资产
@@ -88,6 +90,9 @@ const routes = [
         component: particulars,
         mate: {
             title: '商品详情'
+        },
+        props({query:{id}}){
+            return {id}
         }
     },
     /*管理员登录组件*/
@@ -156,7 +161,7 @@ const routes = [
             title: "买家个人中心"
         },
         /*默认设置打开个人信息*/
-        redirect: '/Personal_center/Personal',
+        redirect: '/Personal_center/Myorder',
         children: [
             /*个人信息*/
             {

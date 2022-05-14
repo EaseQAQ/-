@@ -8,7 +8,7 @@
                 <el-input v-model="form.name"></el-input>
             </el-form-item>
             <el-form-item label="修改密码">
-                <el-input v-model="form.pwd"></el-input>
+                <el-input type='password' v-model="form.pwd"></el-input>
             </el-form-item>
             <el-form-item label="当前头像">
                 <span class="pf-avatar-box">
@@ -19,7 +19,7 @@
                 </span>
             </el-form-item>
             <el-form-item label="电话号码">
-                <el-input v-model="form.ipone"></el-input>
+                <el-input v-model="form.phone"></el-input>
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="onSubmit">保存</el-button>
@@ -34,16 +34,47 @@
         data() {
             return {
                 form: {
+                    // 用户名字
                     name: '',
+                    // 用户密码
                     pwd: '',
-                    ipone: '',
+                    // 用户电话号码
+                    phone: ''
                 }
             }
         },
+        beforeMount(){
+            // 页面一进来的用户数据
+            let id=JSON.parse(window.sessionStorage.getItem('customerid'))
+            console.log(id);
+            this.axios
+                .get(`http://localhost:8080/merchant/personal?uid=${id}`)
+                .then((response)=>{
+                    this.form.name=response.data[0].cust_account;
+                    // this.form.pwd=response.data[0].cust_pwd;
+                    this.form.phone=response.data[0].cust_phone;
+                    this.form.portrait=response.data[0].cust_img;
+                    console.log('修改前的数据：'+this.form.name,this.form.pwd,this.form.phone,this.form.portrait);
+                },(error)=>{
+                    console.log(error)
+                })
+        },
         methods: {
+            // 修改用户信息
             onSubmit() {
-                console.log('submit!');
-            }
+                // 用户的id
+                let id=JSON.parse(window.sessionStorage.getItem('customerid'))
+                this.axios
+                    .get(`http://localhost:8080/merchant/personal/updatainfo?uid=${id}&name=${this.form.name}&pwd=${this.form.pwd}&phone=${this.form.phone}`)
+                    .then((response)=>{
+                        this.pwd=''
+                        // console.log(response.data);
+                        // console.log('修改后的数据：'+this.form.name,this.form.pwd,this.form.phone,this.form.portrait);
+                    },(error)=>{
+                        console.log(error)
+                    })
+            },
+
         }
     }
 </script>

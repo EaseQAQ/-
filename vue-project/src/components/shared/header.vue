@@ -14,32 +14,23 @@
                                         {{this.isoklogon}}<i class="el-icon-arrow-down el-icon--right"></i>
                                     </span>
                                 </a>
-                                <el-dropdown-menu slot="dropdown" class="header-new-drop">
-                                    <span></span>
-                                </el-dropdown-menu>
+                                    <el-dropdown-menu slot="dropdown" class="header-new-drop">
+                                    <a href="/">
+                                        <span id="tui" @click="tui">退出</span></a>
+                                    </el-dropdown-menu>
                             </el-dropdown>
                         </el-breadcrumb-item>
-                        <!-- <el-breadcrumb-item>
-                            <el-dropdown>
-                                亲！请登录
-                            </el-dropdown>
-                            <el-dropdown>
-                                立即注册
-                            </el-dropdown>
-                        </el-breadcrumb-item> -->
                     </div>
                     <!-- 右导航 -->
                     <div class="rn">
                         <el-breadcrumb-item>
                             <el-dropdown>
-                                <a href="#" class="transform">
+                                <a href="/" class="transform">
                                     <span class="el-dropdown-link">
-                                        我的淘宝呗<i class="el-icon-arrow-down el-icon--right"></i>
+                                        返回商城首页
                                     </span>
                                 </a>
                                 <el-dropdown-menu slot="dropdown" class="header-new-drop">
-                                    <el-dropdown-item><span class="after-color">已买到的宝贝</span></el-dropdown-item>
-                                    <el-dropdown-item><span class="after-color">我的足迹</span></el-dropdown-item>
                                 </el-dropdown-menu>
                             </el-dropdown>
                         </el-breadcrumb-item>
@@ -56,27 +47,22 @@
                         <el-breadcrumb-item>
                             <el-dropdown>
                                 <a href="/car" class="transform">
-                                    <span class="el-dropdown-link">
-                                        淘宝呗卖家中心<i class="el-icon-arrow-down el-icon--right"></i>
+                                    <span class="el-dropdown-link" >
+                                        淘宝呗卖家<i class="el-icon-arrow-down el-icon--right"></i>
                                     </span>
                                 </a>
                                 <el-dropdown-menu slot="dropdown" class="header-new-drop">
-                                    <el-dropdown-item><span class="after-color"><a href="/car">开店入驻</a></span></el-dropdown-item>
-                                    <el-dropdown-item><span class="after-color">出售中的宝贝</span></el-dropdown-item>
-                                    <el-dropdown-item><span class="after-color">卖家服务市场</span></el-dropdown-item>
                                 </el-dropdown-menu>
                             </el-dropdown>
                         </el-breadcrumb-item>
                         <el-breadcrumb-item>
                             <el-dropdown>
-                                <a href="#">
+                                <a href="/adminLogon">
                                     <span class="el-dropdown-link transform">
-                                        联系客服<i class="el-icon-arrow-down el-icon--right"></i>
+                                        管理员<i class="el-icon-arrow-down el-icon--right"></i>
                                     </span> 
                                 </a>
                                 <el-dropdown-menu slot="dropdown" class="header-new-drop">
-                                    <el-dropdown-item><span class="after-color">消费者客服</span></el-dropdown-item>
-                                    <el-dropdown-item><span class="after-color">卖家客服</span></el-dropdown-item>
                                 </el-dropdown-menu>
                             </el-dropdown>
                         </el-breadcrumb-item>
@@ -104,8 +90,10 @@
             if(JSON.parse(window.sessionStorage.getItem('customername'))=="null" || JSON.parse(window.sessionStorage.getItem('customername'))==null ){
                 //没有登录，页面显示请登录
                 this.isoklogon='未登录';
+                document.querySelector('#tui').style.display='none'
             }else{
                 this.isoklogon=JSON.parse(window.sessionStorage.getItem('customername'));
+                document.querySelector('#tui').style.display='block'
             }
         },
         methods: {
@@ -125,6 +113,12 @@
                 }else{
                     this.$router.push('/shoptrolley');
                 };
+            },
+            tui(){
+                window.sessionStorage.setItem('customername',JSON.stringify(null))
+                window.sessionStorage.setItem('customerid',JSON.stringify(null))
+                this.isoklogon='未登录'
+                document.querySelector('#tui').style.display='none'
             }
         },
     }
@@ -151,7 +145,7 @@
     left: 0px;
 }
 .content{
-    width: 1000px;
+    width: 70%;
     margin: auto;
     line-height: 34px;
 }

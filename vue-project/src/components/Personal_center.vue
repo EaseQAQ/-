@@ -7,7 +7,7 @@
                     <a title="我的淘宝呗" href="" class="mt-tblogo">我的淘宝呗</a>
                 </div>
                 <nav class="mt-nav">
-                    <el-autocomplete popper-class="my-autocomplete" v-model="state" :fetch-suggestions="querySearch" placeholder="请输入内容" @select="handleSelect">
+                    <el-autocomplete popper-class="my-autocomplete" :fetch-suggestions="querySearch" placeholder="请输入内容" @select="handleSelect">
                         <i class="el-icon-edit el-input__icon" slot="suffix" @click="handleIconClick"></i>
                         <template slot-scope="{ item }">
                             <div class="name">{{ item.value }}</div>
@@ -23,8 +23,14 @@
             <div class="stage_center">
                 <div class="stage_center_bot">
                     <el-row class="tac myapp" >
-                        <el-col :span="3" :style="GetWindowHeight" class="myapp">
-                            <el-menu :default-active="$route.path" class="el-menu-vertical-demo  myapp" @open="handleOpen" @close="handleClose"  :style="GetWindowHeight" >
+                        <el-col :span="3" style="height:500px;" class="myapp">
+                            <el-menu :default-active="$route.path" class="el-menu-vertical-demo  myapp" @open="handleOpen" @close="handleClose"  style="height:500px;" >
+                                <router-link to="Myorder">
+                                    <el-menu-item index="/Personal_center/Myorder">
+                                        <i class="el-icon-chat-line-square"></i>
+                                        <span slot="title">我的订单</span>
+                                    </el-menu-item>
+                                </router-link>
                                 <router-link to="Personal">
                                     <el-menu-item index="/Personal_center/Personal">
                                         <i class="el-icon-sell"></i>
@@ -63,28 +69,12 @@ import Base from './shared/base.vue';
         name: "CarBack_Stage",
         data() {
             return {
-                /*根据浏览器改高度*/
-                tabPosition: 'left',
-                GetWindowHeight: {
-                    height: ''
-                },
                 circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
             };
         },
         // import引入的组件需要注入到对象中才能使用
         components: {
             Header,Base
-        },
-        // 生命周期 - 创建完成（可以访问当前this实例）
-        created () {
-            /*根据浏览器改高度*/
-            window.addEventListener('resize', this.getHeight) // 注册监听器
-            this.getHeight() // 页面创建时先调用一次
-        },
-        // 生命周期 - 销毁完成
-        destroyed () {
-            /*根据浏览器改高度*/
-            window.removeEventListener('resize', this.getHeight)
         },
         // 方法集合
         methods: {

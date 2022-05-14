@@ -20,30 +20,34 @@
                 </el-row>
             </div>
             <div class="information">
-                <div id="shoppnum">共<em>0</em>单订单</div>
+                <div id="shoppnum">共<em v-if="sum">{{sum[0].osum}}</em>单订单</div>
             </div>
             <!--表格-->
             <div class="tab">
-                <el-table :data="tableData" border style="width: 100%">
+                <el-table :data="userlist" border style="width: 100%">
                     <el-table-column type="selection" width="39">
                     </el-table-column>
-                    <el-table-column fixed prop="order" label="订单号" width="63">
+                    <el-table-column fixed prop="order_id" label="订单号" width="63">
                     </el-table-column>
-                    <el-table-column prop="userName" label="用户名" width="130">
+                    <el-table-column prop="order_time" label="下单时间" width="100">
+                        <template slot-scope="scope"><span>{{ timeChange(scope.row.order_time) }}</span></template>
                     </el-table-column>
-                    <el-table-column prop="time" label="下单时间" width="130">
+                    <el-table-column prop="order_sum" label="金额" width="49">
                     </el-table-column>
-                    <el-table-column prop="money" label="下单金额" width="77">
+                    <el-table-column prop="order_done" label="签收时间" width="100">
+                        <template slot-scope="scope"><span>{{ timeChange(scope.row.order_time) }}</span></template>
                     </el-table-column>
-                    <el-table-column prop="sign" label="签收时间" width="130">
+                    <el-table-column prop="goods_name" label="商品名" width="190">
                     </el-table-column>
-                    <el-table-column prop="name" label="商品名" width="140">
+                    <el-table-column prop="detail_count" label="数量" width="49">
                     </el-table-column>
-                    <el-table-column prop="number" label="商品数量" width="77">
+                    <el-table-column prop="sel_store" label="店铺名" width="80">
                     </el-table-column>
-                    <el-table-column prop="site" label="收货地址" width="120">
+                    <el-table-column prop="addr_local" label="收货地址" width="120">
                     </el-table-column>
-                    <el-table-column prop="consignee" label="收货人" width="120">
+                    <el-table-column prop="addr_person" label="收货人" width="65">
+                    </el-table-column>
+                    <el-table-column prop="addr_phone" label="收货人电话" width="112">
                     </el-table-column>
                 </el-table>
             </div>
@@ -53,8 +57,23 @@
 
 <script>
     export default {
+        inject:['reload'],
         name: "OrderM",
+        data() {
+            return {
+                userlist: [],
+                sum:'',
+                restaurants: [],
+                state1: '',
+                state2: '',
+            }
+        },
         methods: {
+            timeChange(data) {
+                let time = data //将需要格式化的数据传入
+                time = this.dayjs(time).format('YYYY-MM-DD HH:mm:ss')
+                return time 
+            },
             querySearch(queryString, cb) {
                 var restaurants = this.restaurants;
                 var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
@@ -124,24 +143,20 @@
         },
         mounted() {
             this.restaurants = this.loadAll();
-        },
-        data() {
-            return {
-                tableData: [{
-                    order: '1',
-                    time: '2022-05-03',
-                    userName:'asda',
-                    money: '100',
-                    sign: '2022-05-03',
-                    name: '撒大大的',
-                    number:'10',
-                    site:'ssssss',
-                    consignee:'大大王'
-                }],
-                    restaurants: [],
-                    state1: '',
-                    state2: ''
-            }
+            const id = parseInt(sessionStorage.getItem('sellerid'));
+            console.log(id);
+            this.axios.get(`http://localhost:8080/merchant/seller/sellerCenter/order?sel_id=${id}`).then((response) => {
+                this.userlist =response.data
+                console.log(this.userlist);
+            }).catch(err=>{
+                console.log("获取数据失败" + err);
+            }),
+            this.axios.get(`http://localhost:8080/merchant/seller/sellerCenter/ordersum?sel_id=${id}`).then((response) => {
+                this.sum =response.data
+                console.log(this.sum[0]);
+            }).catch(err=>{
+                console.log("获取数据失败" + err);
+            })
         }
     }
 </script>

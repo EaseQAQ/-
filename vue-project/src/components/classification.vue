@@ -52,7 +52,19 @@ export default {
     },
     mounted(){
 
-    },  
+    }, 
+    beforeMount(){
+        let name='女装'
+        this.axios
+                .get(`http://localhost:8080/merchant/classificationDetails/bigger?name=${name}`)
+                .then((response)=>{
+                    this.goods='';
+                    this.goods=response.data;
+                    this.goodslength=response.data.length
+                },(error)=>{
+                    console.log(error)
+                })
+    },
     methods:{
         abc(name){
             console.log(name);
@@ -126,8 +138,7 @@ export default {
         }
 
     },
-    computed:{
-        
+    updated(){
     }
 }
 </script>

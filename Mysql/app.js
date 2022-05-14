@@ -48,6 +48,9 @@ app.use('/partic', ticulars)
  //配置首页面路由
 import { page } from './moudules/page/index.js'
 app.use('/page', page)
+ //配置个人中心页路由
+import { person } from './moudules/personal/index.js'
+app.use('/personal', person)
 
 app.listen(8000)
 

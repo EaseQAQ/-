@@ -23,28 +23,17 @@
                             <span class="total-title fl">猜你喜欢</span>
                         </h3>
                         <div class="list clearfix">
-                        <!-- 商品的盒子 
-                        
-                        cateDetail_id: 60020
-                        goods_discount: null
-                        goods_id: 70336
-                        goods_img: "https://s2.loli.net/2022/04/26/LtdnwUafFSc8mV1.jpg"
-                        goods_name: "【经典款】四季新款牛仔衬衫男休闲衬衣男舒适百搭长袖衬衫男"
-                        goods_price: 148
-                        sel_id: 20011
-                        -->
                             <div class="item " role="listitem" aria-posinset="0" aria-setsize="75" v-for="(item,index) in this.shopp" :key="index">
-                                <a href="" class="hotsale-item">
+                                <router-link :to="{path:'/particulars',query:{id:item[0].goods_id}}" class="hotsale-item">
                                     <div class="img-wrapper">
                                         <img :src="item[0].goods_img">
                                     </div>
                                     <h4>{{item[0].goods_name}}</h4>
-                                </a>
+                                </router-link>
                                 <p class="info">
                                     <span class="price"><em>¥</em>{{item[0].goods_price}}</span>
                                 </p>
                             </div>
-
                         </div>
                     </div>
                 </div>

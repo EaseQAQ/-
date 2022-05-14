@@ -43,6 +43,7 @@
 
 <script>
     export default {
+        inject:['reload'],
         name: "MerchantList",
         data() {
             return {
@@ -53,6 +54,18 @@
             }
         },
         methods: {
+            del(row){
+                let id = row
+                console.log(id)
+                this.axios.get(`http://localhost:8080/merchant/admin/superadmin/delseller?id=${id}`).
+                then(res=>{
+                    console.log("成功");
+                    this.reload();
+                })
+                .catch(err=>{
+                    console.log("操作失败" + err);
+                })
+            },
             handleClick(row) {
                 console.log(row);
             },
@@ -72,7 +85,7 @@
             }
         },
         mounted() {
-            this.axios.get('http://localhost:8080/merchant/admin/seller').then((response) => {
+            this.axios.get('http://localhost:8080/merchant/admin/superadmin/seller').then((response) => {
                 this.userlist =response.data
             }).catch(err=>{
                 console.log("获取数据失败" + err);
