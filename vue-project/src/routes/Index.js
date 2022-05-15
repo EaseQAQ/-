@@ -25,8 +25,6 @@ import CarBack_Stage from "@/components/CarBack_Stage";
     import OrderM from "@/components/CarBack_Stage/OrderM";
 // 个人中心
 import Personal_center from "@/components/Personal_center";
-    // 我的订单
-    import Myorder from "@/components/Personal_center/Myorder";
     // 个人信息
     import Personal from "@/components/Personal_center/Personal";
     // 个人资产

@@ -38,15 +38,34 @@
                     </el-table-column>
                     <el-table-column prop="adm_super" label="管理员权限" width="130">
                     </el-table-column>
-                    <!-- <el-table-column prop="classify" label="管理分类" width="150">
-                    </el-table-column> -->
+                    <el-table-column prop="category_name" label="管理分类" width="150">
+                    </el-table-column>
                     <el-table-column fixed="right" label="操作" width="130">
                     <template #default="scope">
-                        <el-button @click="del(scope.row.sel_id)" type="text" size="small">删除</el-button>
-                        <el-button type="text" size="small">修改权限</el-button>
+                        <el-button @click="del(scope.row.adm_id)" type="text" size="small">删除</el-button>
+                        <el-button type="text" size="small" @click="activate(scope.row.adm_id,centerDialogVisible=true)">修改</el-button>
                     </template>
                     </el-table-column>
                 </el-table>
+                <el-dialog title="提示" :visible.sync="centerDialogVisible" width="40%" center>
+                    <el-form ref="form" :model="form" label-width="80px">
+                        <el-form-item label="修改账号">
+                            <el-input v-model="form.adm_account"></el-input>
+                        </el-form-item>
+                        <el-form-item label="修改密码">
+                            <el-input v-model="form.adm_pwd"></el-input>
+                        </el-form-item>
+                        <el-form-item label="修改分类">
+                            <el-select v-model="form.category_id" clearable placeholder="修改管理分类">
+                                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button @click="centerDialogVisible = false">取 消</el-button>
+                            <el-button type="primary" @click="onSubmit">保存</el-button>
+                        </el-form-item>
+                    </el-form>
+                </el-dialog>
             </div>
         </div>
     </div>
@@ -59,15 +78,40 @@
         data() {
             return {
                 userlist: [],
+                form:{
+                    adm_id:'',
+                    adm_account:'',
+                    adm_pwd:'',
+                    category_id:'',
+                    category_name:''
+                },
                 restaurants: [],
                 state1: '',
-                state2: ''
+                state2: '',
+                centerDialogVisible: false,
+                // 下拉选择框
+                options: [],
+                value: '',
             }
         },
         // created(){
             
         // },
         methods: {
+            activate(row){
+                this.form.adm_id=row
+                let id =row
+                console.log(id);
+                this.axios.get(`http://localhost:8080/merchant/admin/superadmin/amend?adm_id=${id}`).then((response)=>{
+                    this.form.adm_account=response.data[0].adm_account;
+                    this.form.adm_pwd=response.data[0].adm_pwd;
+                    this.form.category_id=response.data[0].category_id;
+                    this.form.category_name=response.data[0].category_name;
+                    console.log('修改前的数据：'+this.form.adm_account,this.form.adm_pwd,this.form.category_id,this.form.category_name);
+                },(error)=>{
+                    console.log(error)
+                })
+            },
             del(row){
                 let id = row
                 console.log(id)
@@ -79,6 +123,18 @@
                 .catch(err=>{
                     console.log("操作失败" + err);
                 })
+            },
+            onSubmit() {
+                // 管理员的id
+                let id=parseInt(this.form.adm_id);
+                let category_id=parseInt(this.form.category_id);
+                console.log(this.form);
+                this.axios.get(`http://localhost:8080/merchant/personal/updatainfo?uid=${id}&name=${this.form.adm_account}&pwd=${this.form.adm_pwd}&phone=${category_id}`).then((response)=>{
+                        // console.log(response.data);
+                        console.log('修改后的数据：'+this.form.adm_account,this.form.adm_pwd,category_id);
+                    },(error)=>{
+                        console.log(error)
+                    })
             },
             querySearch(queryString, cb) {
                 var restaurants = this.restaurants;
@@ -153,6 +209,17 @@
                 this.userlist =response.data
             }).catch(err=>{
                 console.log("获取数据失败" + err);
+            }),
+            this.axios.get(`http://localhost:8080/merchant/admin/superadmin/select`).then((response)=>{
+                console.log(response.data);
+                for(let i=0;i<response.data.length;i++){
+                    this.options.push({
+                    value:response.data[i].category_id,
+                    label:response.data[i].category_name
+                    })
+                }
+            },(error)=>{
+                console.log(error);
             })
         }
     }

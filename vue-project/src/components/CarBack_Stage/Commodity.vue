@@ -37,11 +37,31 @@
                 <el-table-column fixed="right" label="操作" width="100">
                     <template #default="scope">
                         <el-button @click="del(scope.row.goods_id)" type="text" size="small">下架</el-button>
-                        <el-button type="text" size="small">编辑</el-button>
+                        <el-button type="text" size="small" @click="centerDialogVisible = true">编辑</el-button>
                     </template>
                 </el-table-column>
             </el-table>
             <el-pagination background layout="prev, pager, next" v-if="sum" :total="sum[0].osum" :page-size="size" @current-change="changePage"></el-pagination>
+            <el-dialog title="提示"  :visible.sync="centerDialogVisible" width="30%" center>
+                <el-form ref="form"  label-width="80px">
+                    <el-form-item label="价格">
+                        <el-input></el-input>
+                    </el-form-item>
+                    <el-form-item label="数量">
+                        <el-input type='password'></el-input>
+                    </el-form-item>
+                    <el-form-item label="s">
+                        <el-input ></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary">保存</el-button>
+                    </el-form-item>
+                </el-form>
+                <span slot="footer" class="dialog-footer">
+                    <el-button @click="centerDialogVisible = false">取 消</el-button>
+                    <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
+                </span>
+            </el-dialog>
         </div>
     </div>
 </template>
@@ -52,13 +72,14 @@
         name: "commodity",
         data() {
             return {
-                userlist: [],
+                userlist:[],
                 sum:'',
                 size: 50,
                 currentPage: 1,
                 restaurants: [],
                 state1: '',
                 state2: '',
+                centerDialogVisible: false,
             }
         },
         methods: {
